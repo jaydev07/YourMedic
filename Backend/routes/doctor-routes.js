@@ -12,7 +12,6 @@ router.post("/signup",
         check("name").not().isEmpty(),
         check("email").isEmail(),
         check("password").not().isEmpty(),
-        check('accessKey').not().isEmpty(),
         check('phoneNo').not().isEmpty(),
         check('city').not().isEmpty(),
         check('state').not().isEmpty(),
@@ -24,8 +23,7 @@ router.post("/signup",
 router.post("/login",
     [
         check("email").isEmail(),
-        check("password").not().isEmpty(),
-        check('accessKey').not().isEmpty()
+        check("password").not().isEmpty()
     ]
     , doctorControllers.login);
 

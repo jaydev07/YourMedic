@@ -41,9 +41,9 @@ app.use((error,req,res,next) => {
 })
 
 mongoose
-    .connect("mongodb+srv://innoventx:jaydev123@cluster0.tfs4b.mongodb.net/covid?retryWrites=true&w=majority",{ useNewUrlParser: true,useUnifiedTopology: true  })
+    .connect("mongodb+srv://innoventx:innoventx123@cluster0.bhow9.mongodb.net/hackon?retryWrites=true&w=majority",{ useNewUrlParser: true,useUnifiedTopology: true  })
     .then(() => {
-        const server = app.listen(8080,() => {
+        app.listen(8080,() => {
             console.log("server listening at 8080");
             const core = require("./schedulers");
         });

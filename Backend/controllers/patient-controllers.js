@@ -1,17 +1,13 @@
 const mongoose = require("mongoose");
-const fetch = require("node-fetch");
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const { validationResult } = require("express-validator");
 const nodemailer = require("nodemailer");
-const sendgridTransport = require("nodemailer-sendgrid-transport");
 
 const HttpError = require("../util/http-error");
 const Patient = require("../models/patient-model");
 const Doctor = require("../models/doctor-model");
 const Report = require("../models/report-model");
-
-const doctorKey = "AAAAMGzW3sY:APA91bFkpmHZumZxoN-Sm7BOPYsnACLvmFc_WiR6WrbTRrWp6BdwfYvVBU4jBnhpdx0oZ2vb7gYswVAcgJX8DberZVai5MiCYMz9MEIb0gpskPpFIqtdxsyybAWdbYtOfDjKTj4fARmy";
 
 //////////////////////////////////////////////////////////// GET /////////////////////////////////////////////////////////////////////////
 
@@ -156,7 +152,6 @@ const signup = async(req, res, next) => {
         name: req.body.name,
         email: req.body.email,
         password,
-        accessKey: req.body.accessKey,
         phoneNo: req.body.phoneNo,
         city: req.body.city,
         state: req.body.state,
@@ -204,7 +199,7 @@ const login = async(req, res, next) => {
     }
 
     console.log(req.body);
-    const {email,password,accessKey} = req.body;
+    const {email,password} = req.body;
 
     let patientFound;
     try {
@@ -217,15 +212,6 @@ const login = async(req, res, next) => {
     if (!patientFound) {
         return next(new HttpError('Patient not found.Please signup!', 500));
     } else {
-
-        patientFound.accessKey = accessKey;
-        try{
-            await patientFound.save();
-        }catch(err){
-            console.log(err);
-            return next(new HttpError('Something went wrong', 500));
-        }
-
         const auth = await bcrypt.compare(password, patientFound.password);
         if (!auth) {
             return next(new HttpError('Incorrect password!', 500));
@@ -415,38 +401,6 @@ const consultDoctor = async(req, res, next) => {
             console.log("Email sent:" + info.response);
         }
     });
-
-    ///////////////////////////////////////////////////
-
-    // Notification of new patient which should be sended to the doctor 
-    let notification = {
-        'title': 'New Patient Request',
-        'text': patientFound.name
-    }
-
-    // Tokens of mobile devices
-    let fcm_tokens = [doctorFound.accessKey];
-
-    var notification_body = {
-        'notification': notification,
-        'registration_ids': fcm_tokens
-    }
-
-    try {
-        await fetch('https://fcm.googleapis.com/fcm/send', {
-            "method": 'POST',
-            "headers": {
-                "Authorization": "key=" + doctorKey,
-                "Content-Type": "application/json"
-            },
-            "body": JSON.stringify(notification_body)
-        });
-
-        console.log("Notification sended successfully to doctor");
-    } catch (err) {
-        console.log(err);
-        return next(new HttpError('Notification was not sended to the doctor.', 500));
-    }
 
     res.json({ doctor: doctorFound.toObject({ getters: true }), patient: patientFound.toObject({ getters: true }) });
 }

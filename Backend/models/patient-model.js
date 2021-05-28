@@ -10,8 +10,6 @@ const patientSchema = new mongoose.Schema({
 
     password:{type:String , required:true},
 
-    accessKey:{type:String},
-
     phoneNo:{type:Number , required:true , unique:true},
 
     city:{ type:String , required:true },
