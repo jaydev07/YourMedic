@@ -170,6 +170,7 @@ const signup = async(req, res, next) => {
         phoneNo: req.body.phoneNo,
         city: req.body.city,
         state: req.body.state,
+        gender: req.bidy.gender,
         doctorLicense: req.body.doctorLicense,
         designation: req.body.designation,
         patientIds: [],

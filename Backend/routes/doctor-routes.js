@@ -15,6 +15,7 @@ router.post("/signup",
         check('phoneNo').not().isEmpty(),
         check('city').not().isEmpty(),
         check('state').not().isEmpty(),
+        check('gender').not().isEmpty(),
         check('doctorLicense').not().isEmpty(),
         check('designation').not().isEmpty()
     ], doctorControllers.signup);
