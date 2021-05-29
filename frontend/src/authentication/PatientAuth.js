@@ -141,9 +141,13 @@ const PatientAuth = () => {
                 }
 
                 auth.login(responseData.patient.id , responseData.patient.token , true);
-                if(responseData.patient.symptoms){
+                if(responseData.patient.prescribedMedicines.length > 0){
                     history.push(`/patient/home/${responseData.patient.id}`);
-                }else{
+                }
+                else if(responseData.patient.symmptoms){
+                    history.push(`/showalldoctors`);
+                }
+                else{
                     history.push("/addsymptoms");
                 }
             }catch(err){
