@@ -115,7 +115,7 @@ const PatientAuth = () => {
 
                 auth.login(responseData.patient.id , responseData.patient.token);
 
-                history.push("/showalldoctors");
+                history.push("/addsymptoms");
             }catch(err){
                 console.log(err);
                 setError(err.message);
@@ -141,7 +141,7 @@ const PatientAuth = () => {
                 }
 
                 auth.login(responseData.patient.id , responseData.patient.token);
-                history.push("/showalldoctors");
+                history.push("/addsymptoms");
             }catch(err){
                 console.log(err);
                 setError(err.message);

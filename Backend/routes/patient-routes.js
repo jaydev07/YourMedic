@@ -58,8 +58,7 @@ router.post("/consultDoctor",
 // To add the symptoms & current medication of a patient
 router.post("/addSymptomDetails/:patientId",
     [
-        check("symptoms").not().isEmpty(),
-        check('currentMedicines').not().isEmpty(),
+        check("symptoms").not().isEmpty()
     ]
     , patientControllers.addSymptomDetails);
 

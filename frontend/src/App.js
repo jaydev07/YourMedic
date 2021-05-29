@@ -13,10 +13,9 @@ import PatientAuth from "./authentication/PatientAuth";
 import DoctorAuth from "./authentication/DoctorAuth";
 import ShowAllDoctors from "./patient/pages/ShowAllDoctors";
 import Home from "./patient/pages/Home";
-
 import GetPatients from './doctor/pages/GetPatients';
-
 import ConsultRequests from './doctor/pages/CosultRequests';
+import AddSymptoms from "./patient/pages/AddSymptoms";
 
 const App = () => {
 
@@ -50,6 +49,10 @@ const App = () => {
 
         <Route path="/consultrequests" exact>
           <ConsultRequests />
+        </Route>
+
+        <Route path="/addsymptoms" exact>
+          <AddSymptoms />
         </Route>
 
         <Route path="/" exact>

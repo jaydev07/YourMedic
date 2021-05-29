@@ -74,10 +74,6 @@ const ConsultRequests = () => {
         setError(null);
         setPopup(null);
     }
-    const handleModelButton = () => {
-        setError(null);
-        setPopup(null);
-    }
 
     // get patients from backend
     useEffect(() => {
@@ -106,7 +102,7 @@ const ConsultRequests = () => {
             { popup && (
                 <React.Fragment>
                     <Backdrop onClick={errorHandler} />
-                    <ErrorModal heading="Message" error={popup} button={true} handleButton={handleModelButton}/>
+                    <ErrorModal heading="Message" error={popup} button={true} handleButton={errorHandler}/>
                 </React.Fragment>
             )}
             { error && (
