@@ -7,6 +7,7 @@ import ErrorModal from "../../shared/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/UIElements/LoadingSpinner";
 import DoctorList from "../components/DoctorList";
 import "./ShowAllDoctors.css";
+import BackgroungImg from '../../Photos/DrListGg.jpg';
 
 const ShowAllDoctors = () => {
 
@@ -82,21 +83,23 @@ const ShowAllDoctors = () => {
 
     return(
         <React.Fragment>
-            { error && (
-                <React.Fragment>
-                    <Backdrop onClick={errorHandler} />
-                    <ErrorModal heading="Error Occured!" error={error} />
-                </React.Fragment>
-            )}
-            { isLoading && <LoadingSpinner asOverlay />}
+            <div style={{backgroundImage: `url(${BackgroungImg})`,backgroundSize:"contain"}}>
+                { error && (
+                    <React.Fragment>
+                        <Backdrop onClick={errorHandler} />
+                        <ErrorModal heading="Error Occured!" error={error} />
+                    </React.Fragment>
+                )}
+                { isLoading && <LoadingSpinner asOverlay />}
 
-            <h1 className="Title" style={{float:"left"}}>List of Doctors</h1>
-            <div style={{clear:"both"}}>
-                <button className="NearByBtn" onClick={getDoctosNearBy}>{showAllDoctors ? "Get doctors near by" : "Show all doctors"}</button>
+                <p className="Title" style={{float:"left",backgroundImage: `url(${BackgroungImg})`,fontSize:"4em"}}>List of Doctors</p>
+                <div style={{clear:"both"}}>
+                    <button className="NearByBtn" onClick={getDoctosNearBy}>{showAllDoctors ? "Get doctors near by" : "Show all doctors"}</button>
+                </div>
+                { !isLoading && doctors && (
+                    <DoctorList doctors={doctors}/>
+                )}
             </div>
-            { !isLoading && doctors && (
-                <DoctorList doctors={doctors}/>
-            )}
         </React.Fragment>
     );
 }

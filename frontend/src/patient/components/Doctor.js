@@ -5,8 +5,8 @@ import "./Doctor.css";
 
 const Doctor = (props) => {
     return(
-        <React.Fragment>            
-            <div className="DocBox" class="container" style={{boxShadow:"rgba(0, 0, 0, 0.24) 2px 8px 20px",clear:"both",paddingTop:"2%",padding:"1% 3% 1%",margin:"1% 10% 1%",width:"80%"}}> 
+        <React.Fragment>                   
+            <div className="DocBox" class="container" style={{background:"white" ,boxShadow:"rgba(0, 0, 0, 0.24) 2px 8px 20px",clear:"both",paddingTop:"2%",padding:"1% 3% 1%",margin:"1% 10% 1%",width:"80%",borderRadius:"15px"}}> 
                 <div class="row">
                     <div class="col-2">
                         <div class="row">
