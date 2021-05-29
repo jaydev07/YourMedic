@@ -2,26 +2,14 @@
     margin-top: 1%;
     background-color:#4741419e;    
     padding: 1% 3% 1%;
-    border-radius: 20px;
+    border-radius: 80px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
 }
 
 .ConsultBtn{
     text-align: center;
-    border-radius: 8px;
+    border-radius: 80px;  
+    background-color: #ffdcdc; 
 }
-
-.DocImg{
-    padding-top: 5%;
-    height: 50%;
-    width: 20%;
-}
-.DocBio1{
-    padding-top: 5%;
-    width: 60%;
-    padding-left: 10%;
-}
-.DocBio2{
-    padding-top: 5%; 
-    width: 40%;
-    padding-left: 10%;
-}
+.ConsultBtn:hover {background-color: #ffdcdc}

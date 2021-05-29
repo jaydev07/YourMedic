@@ -1,16 +1,16 @@
 import React from "react";
-import DrM from '../../Photos/Dr_M.png';
-import DrF from '../../Photos/Dr_F.png';
+import DrM from '../../Photos/Dr_M.svg';
+import DrF from '../../Photos/Dr_F.svg';
 import "./Doctor.css";
 
 const Doctor = (props) => {
     return(
         <React.Fragment>            
-            <div className="DocBox" class="container" style={{clear:"both",paddingTop:"2%",padding:"1% 3% 1%",margin:"1% 7% 1%"}}> 
+            <div className="DocBox" class="container" style={{boxShadow:"rgba(0, 0, 0, 0.24) 2px 8px 20px",clear:"both",paddingTop:"2%",padding:"1% 3% 1%",margin:"1% 10% 1%",width:"80%"}}> 
                 <div class="row">
                     <div class="col-2">
                         <div class="row">
-                            {props.gender==="Male" ? <img style={{width: 80,height: 55,borderRadius:80}} src={DrM} alt="Male Dr." /> : <img style={{width: 80,height: 55,borderRadius:80}} src={DrF} alt="Female Dr." /> }
+                            {props.gender==="Male" ? <img style={{width: 80,height: 80,borderRadius:100}} src={DrM} alt="Male Dr." /> : <img style={{width: 80,height: 55,borderRadius:80}} src={DrF} alt="Female Dr." /> }
                         </div>
                         <div class="row">
                             <h5>{props.name}</h5>      
@@ -37,9 +37,7 @@ const Doctor = (props) => {
                         <div class="row">
                             <p>State: {props.state}</p>                           
                         </div>
-                        <div class="row">
-                            <button className="ConsultBtn">Consult</button>         
-                        </div>
+                        <button className="ConsultBtn" style={{display:"inline-block"}}>Consult</button>         
                     </div>
                 </div>                
             </div>
