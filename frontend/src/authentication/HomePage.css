@@ -1,6 +1,6 @@
 #wrapper3 {
     min-height: 100%;
-    background-image: url("F:/Web Development/Covid-WebApp/COVID-Home-Management/frontend/src/Photos/SignUp-Bg.svg")!important;
+    background-image: url("../Photos/SignUp-Bg.svg")!important;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;

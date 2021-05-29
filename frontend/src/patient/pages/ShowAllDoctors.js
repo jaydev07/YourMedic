@@ -10,7 +10,6 @@ import DoctorList from "../components/DoctorList";
 const ShowAllDoctors = () => {
 
     const auth = useContext(AuthContext);
-    const history = useHistory();
     const [isLoading , setIsLoading] = useState(false);
     const [error , setError] = useState();
 

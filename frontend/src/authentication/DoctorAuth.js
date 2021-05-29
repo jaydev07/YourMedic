@@ -1,4 +1,5 @@
 import React,{useState,useContext} from "react";
+import {useHistory} from "react-router-dom";
 
 import "./PatientAuth.css";
 import {useForm} from "../shared/hoocks/form-hook";
@@ -12,6 +13,7 @@ import LoadingSpinner from "../shared/UIElements/LoadingSpinner";
 const DoctorAuth = () => {
 
     const auth = useContext(AuthContext);
+    const history = useHistory();
     const [isLogin , setIsLogin] = useState(true);
     const [isLoading , setIsLoading] = useState(false);
     const [error , setError] = useState();
@@ -118,6 +120,7 @@ const DoctorAuth = () => {
                 }
 
                 auth.login(responseData.doctor.id , responseData.token);
+                history.push("/patients");
             }catch(err){
                 console.log(err);
                 setError(err.message);
@@ -143,6 +146,7 @@ const DoctorAuth = () => {
                 }
 
                 auth.login(responseData.doctor.id , responseData.token);
+                history.push("/patients");
             }catch(err){
                 console.log(err);
                 setError(err.message);
@@ -154,6 +158,7 @@ const DoctorAuth = () => {
     return(
         <React.Fragment>
         <div id="wrapper2">
+            
             { error && (
                 <React.Fragment>
                     <Backdrop onClick={errorHandler} />
@@ -161,6 +166,7 @@ const DoctorAuth = () => {
                 </React.Fragment>
             )}
             { isLoading && <LoadingSpinner asOverlay />}
+
             <div className="signin">
                 <h1 className='title'>Doctor {isLogin ? "Login":"Signup"}</h1>
                 <form className="auth-form">

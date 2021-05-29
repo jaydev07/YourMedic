@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-export const ConcertRequest = () => {
+const ConcertRequest = () => {
 
     const [requests, setRequests] = useState([]);
 
@@ -45,3 +45,5 @@ export const ConcertRequest = () => {
     )
 
 }
+
+export default ConcertRequest;
