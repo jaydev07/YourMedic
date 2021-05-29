@@ -3,17 +3,8 @@
     text-align: center;
     border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    width: 50%;
-    margin-left: 25%;
-}
-
-.NearByBtn{    
-    background-color: white;
-    text-align: center;    
-    border-radius: 8px;
-    width: 20%;
-    margin-left: 70%;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 60%;
+    margin-left: 20%;
 }
 
 .DocBox{
@@ -23,13 +14,18 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.ConsultBtn{
+.AcceptBtn{
     text-align: center;
     border-radius: 8px;  
-    background-color: #ffdcdc; 
+    background-color:white; 
     box-shadow: rgba(0, 0, 0, 0.24) 0px 10px 8px;
 }
+.AcceptBtn:hover {background-color: #fd7e43}
 
-.ConsultBtn:hover {background-color: #fd7e43}
-
-.NearByBtn:hover {background-color: #f4511e}
+.RejectBtn{
+    text-align: center;
+    border-radius: 8px;  
+    background-color: white; 
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 10px 8px;
+}
+.RejectBtn:hover {background-color: #fd7e43}
