@@ -15,10 +15,48 @@ const ShowAllDoctors = () => {
     const [error , setError] = useState();
 
     const [doctors , setDoctors] = useState();
+    const [showAllDoctors , setShowAllDoctors] = useState(true);
 
     // To handle error
     const errorHandler = () => {
         setError(null);
+    }
+
+    const getDoctosNearBy = async () => {
+        if(showAllDoctors){
+            try{
+                setIsLoading(true);
+                const response = await fetch(`http://localhost:8080/api/patient/doctorsNearBy/${auth.userId}`);
+                const responseData = await response.json();
+    
+                if(responseData.message){
+                    throw new Error(responseData.message);
+                }
+    
+                setDoctors(responseData.doctors);
+            }catch(err){
+                console.log(err);
+                setError(err.message);
+            }
+            setIsLoading(false);
+        }else{
+            try{
+                setIsLoading(true);
+                const response = await fetch("http://localhost:8080/api/doctor/all");
+                const responseData = await response.json();
+
+                if(responseData.message){
+                    throw new Error(responseData.message);
+                }
+
+                setDoctors(responseData.doctors);
+            }catch(err){
+                console.log(err);
+                setError(err.message);
+            }
+            setIsLoading(false);
+        }
+        setShowAllDoctors(pre => !pre);
     }
 
     useEffect(() => {
@@ -52,7 +90,8 @@ const ShowAllDoctors = () => {
             )}
             { isLoading && <LoadingSpinner asOverlay />}
 
-            <h1>List of all the doctors</h1>
+            <h1>List of Doctors</h1>
+            <button onClick={getDoctosNearBy}>{showAllDoctors ? "Get doctors near by" : "Show all doctors"}</button>
 
             { !isLoading && doctors && (
                 <DoctorList doctors={doctors}/>
