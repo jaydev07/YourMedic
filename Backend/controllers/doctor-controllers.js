@@ -170,7 +170,7 @@ const signup = async(req, res, next) => {
         phoneNo: req.body.phoneNo,
         city: req.body.city,
         state: req.body.state,
-        gender: req.bidy.gender,
+        gender: req.body.gender,
         doctorLicense: req.body.doctorLicense,
         designation: req.body.designation,
         patientIds: [],
@@ -289,6 +289,9 @@ const confirmPatient = async (req,res,next) => {
     }
     if(!patientFound){
         return next(new HttpError('Patient not found!', 500));
+    }
+    if(!doctorFound){
+        return next(new HttpError('Doctor not found!', 500));
     }
 
     let today = new Date();

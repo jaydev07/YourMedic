@@ -1,13 +1,20 @@
-import React,{useState} from "react";
+import React,{useState,useContext} from "react";
 
 import "./PatientAuth.css";
 import {useForm} from "../shared/hoocks/form-hook";
 import Input from "../shared/components/Input";
+import {AuthContext} from "../shared/context/AuthContext";
 import {VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE} from "../shared/components/validators";
+import Backdrop from "../shared/UIElements/Backdrop";
+import ErrorModal from "../shared/UIElements/ErrorModal";
+import LoadingSpinner from "../shared/UIElements/LoadingSpinner";
 
 const DoctorAuth = () => {
 
+    const auth = useContext(AuthContext);
     const [isLogin , setIsLogin] = useState(true);
+    const [isLoading , setIsLoading] = useState(false);
+    const [error , setError] = useState();
 
     const [designation,setDesignation] = useState("M.B.B.S");
     const [gender,setGender] = useState("Male");
@@ -77,14 +84,85 @@ const DoctorAuth = () => {
         const newDesignation = event.target.value;
         setDesignation(newDesignation);
     }
+    // To handle error
+    const errorHandler = () => {
+        setError(null);
+    }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(formState.inputs,gender,designation);
+        console.log(formState.inputs,gender);
+        if(!isLogin){
+            try{
+                setIsLoading(true);
+                const response = await fetch("http://localhost:8080/api/doctor/signup",{
+                    method:'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name:formState.inputs.name.value,
+                        email:formState.inputs.email.value,
+                        password:formState.inputs.password.value,
+                        phoneNo:formState.inputs.phoneNo.value,
+                        city:formState.inputs.city.value,
+                        state:formState.inputs.state.value,
+                        doctorLicense:formState.inputs.doctorLicense.value,
+                        gender:gender,
+                        designation:designation
+                    })
+                });
+                const responseData = await response.json();
+
+                if(responseData.message){
+                    throw new Error(responseData.message);
+                }
+
+                auth.login(responseData.doctor.id , responseData.token);
+            }catch(err){
+                console.log(err);
+                setError(err.message);
+            }
+            setIsLoading(false);
+        }else{
+            try{
+                setIsLoading(true);
+                const response = await fetch("http://localhost:8080/api/doctor/login",{
+                    method:'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email:formState.inputs.email.value,
+                        password:formState.inputs.password.value
+                    })
+                });
+                const responseData = await response.json();
+
+                if(responseData.message){
+                    throw new Error(responseData.message);
+                }
+
+                auth.login(responseData.doctor.id , responseData.token);
+            }catch(err){
+                console.log(err);
+                setError(err.message);
+            }
+            setIsLoading(false);
+        }
     }
 
     return(
         <React.Fragment>
+
+            { error && (
+                <React.Fragment>
+                    <Backdrop onClick={errorHandler} />
+                    <ErrorModal heading="Error Occured!" error={error} />
+                </React.Fragment>
+            )}
+            { isLoading && <LoadingSpinner asOverlay />}
+
             <h1>Doctor {isLogin ? "Login":"Signup"}</h1>
             <form className="auth-form">
 
