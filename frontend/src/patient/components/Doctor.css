@@ -1,0 +1,30 @@
+.DocBox{
+    margin-top: 10px;
+    margin-left:10% ;
+    display: inline-block;
+    background-color:#4741419e;    
+    padding: 1% 5% 2%;
+    border-radius: 10px;
+    width: 80%;
+}
+
+.ConsultBtn{
+    text-align: center;
+    border-radius: 8px;
+}
+
+.DocImg{
+    padding-top: 5%;
+    height: 50%;
+    width: 20%;
+}
+.DocBio1{
+    padding-top: 5%;
+    width: 60%;
+    padding-left: 10%;
+}
+.DocBio2{
+    padding-top: 5%; 
+    width: 40%;
+    padding-left: 10%;
+}

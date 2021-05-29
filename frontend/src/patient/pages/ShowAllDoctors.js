@@ -89,9 +89,10 @@ const ShowAllDoctors = () => {
             )}
             { isLoading && <LoadingSpinner asOverlay />}
 
-            <h1>List of Doctors</h1>
-            <button onClick={getDoctosNearBy}>{showAllDoctors ? "Get doctors near by" : "Show all doctors"}</button>
-
+            <h1 style={{float:"left"}}>List of Doctors</h1>
+            <div style={{clear:"both"}}>
+                <button className="NearByBtn" onClick={getDoctosNearBy}>{showAllDoctors ? "Get doctors near by" : "Show all doctors"}</button>
+            </div>
             { !isLoading && doctors && (
                 <DoctorList doctors={doctors}/>
             )}
