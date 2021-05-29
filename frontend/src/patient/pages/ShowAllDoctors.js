@@ -6,6 +6,7 @@ import Backdrop from "../../shared/UIElements/Backdrop";
 import ErrorModal from "../../shared/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/UIElements/LoadingSpinner";
 import DoctorList from "../components/DoctorList";
+import "./ShowAllDoctors.css";
 
 const ShowAllDoctors = () => {
 
@@ -89,7 +90,7 @@ const ShowAllDoctors = () => {
             )}
             { isLoading && <LoadingSpinner asOverlay />}
 
-            <h1 style={{float:"left"}}>List of Doctors</h1>
+            <h1 className="Title" style={{float:"left"}}>List of Doctors</h1>
             <div style={{clear:"both"}}>
                 <button className="NearByBtn" onClick={getDoctosNearBy}>{showAllDoctors ? "Get doctors near by" : "Show all doctors"}</button>
             </div>
