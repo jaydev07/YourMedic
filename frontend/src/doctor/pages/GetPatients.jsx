@@ -59,7 +59,7 @@ const GetPatients = () => {
                         <h1>No active patients</h1>
                     )}
                     <Link to="/consultrequests">
-                        See Nonclnsulted Patients
+                        See Nonconsulted Patients
                     </Link>
                     <hr />
                     {patients.length!==0 ? (

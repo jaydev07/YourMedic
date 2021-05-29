@@ -16,6 +16,7 @@ import Home from "./patient/pages/Home";
 import GetPatients from './doctor/pages/GetPatients';
 import ConsultRequests from './doctor/pages/CosultRequests';
 import AddSymptoms from "./patient/pages/AddSymptoms";
+import Prescribe from './doctor/pages/Prescribe';
 
 const App = () => {
 
