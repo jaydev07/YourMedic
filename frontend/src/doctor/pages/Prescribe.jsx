@@ -1,25 +1,37 @@
-import React, { useState } from 'react'
+import React,{useState,useContext,useEffect} from "react";
+import {useHistory,Link,useParams} from "react-router-dom";
 
-function Prescribe(id, patiendId) {
-    
-    const [medicines, setMedicines] = useState([]);
-    const [morning, setMorning] = useState('morningbefore');
-    const [afternoon, setAfternoon] = useState('afternoonbefore');
-    const [evening, setEvening] = useState('eveningbefore');
+import {AuthContext} from "../../shared/context/AuthContext";
+import Backdrop from "../../shared/UIElements/Backdrop";
+import ErrorModal from "../../shared/UIElements/ErrorModal";
+import LoadingSpinner from "../../shared/UIElements/LoadingSpinner";
+import PatientList from "../components/PatientList";
+
+const Prescribe = () => {
+
+    const patientId = useParams().patientId;
+    const auth = useContext(AuthContext);
+    const [isLoading , setIsLoading] = useState(false);
+    const [error , setError] = useState();
+    const [patient , setPatient] = useState();
 
     const medicine = {
         name: '',
         duration: 0,
-        quantity: 0,
         time: {
-            morningBefore: 0,
-            morningAfter: 0,
-            afternoonBefore: 0,
-            afternoonAfter: 0,
-            eveningBefore: 0,
-            eveningAfter: 0
+            morningBeforeB: 0,
+            morningAfterB: 0,
+            afternoonBeforeL: 0,
+            afternoonAfterL: 0,
+            eveningBeforeD: 0,
+            eveningAfterD: 0
         }
     }
+    const [medicines, setMedicines] = useState([medicine]);
+    const [morning, setMorning] = useState('morningBeforeB');
+    const [afternoon, setAfternoon] = useState('afternoonBeforeB');
+    const [evening, setEvening] = useState('eveningBeforeB');
+
 
     function addMedicine(){
         setMedicines([...medicines, medicine]);
@@ -31,55 +43,50 @@ function Prescribe(id, patiendId) {
             newMed[index].name = e.target.value;
             setMedicines(newMed);
         }
-        if (e.target.id === 'duration') {
+        else if (e.target.id === 'duration') {
             const newMed = [...medicines];
             newMed[index].duration = Number(e.target.value);
             setMedicines(newMed);
         }
-        if (e.target.id === 'quantity') {
-            const newMed = [...medicines];
-            newMed[index].quantity = Number(e.target.value);
-            setMedicines(newMed);
-        }
-        if (e.target.id === 'morning') {
-            if (morning === 'morningbefore') {
+        else if (e.target.id === 'morning') {
+            if (morning === 'morningBeforeB') {
                 const newMed = [...medicines];
-                newMed[index].time.morningBefore = Number(e.target.value);
-                newMed[index].time.morningAfter = 0;
+                newMed[index].time.morningBeforeB = Number(e.target.value);
+                newMed[index].time.morningAfterB = 0;
                 setMedicines(newMed);
                 
             } else {
                 const newMed = [...medicines];
-                newMed[index].time.morningAfter = Number(e.target.value);
-                newMed[index].time.morningBefore = 0;
+                newMed[index].time.morningAfterB = Number(e.target.value);
+                newMed[index].time.morningBeforeB = 0;
                 setMedicines(newMed);
             }
         }
-        if (e.target.id === 'afternoon') {
-            if (afternoon === 'afternoonbefore') {
+        else if (e.target.id === 'afternoon') {
+            if (afternoon === 'afterNoonbeforeL') {
                 const newMed = [...medicines];
-                newMed[index].time.afternoonBefore = Number(e.target.value);
-                newMed[index].time.afternoonAfter = 0;
+                newMed[index].time.afternoonBeforeL = Number(e.target.value);
+                newMed[index].time.afternoonAfterL = 0;
                 setMedicines(newMed);
                 
             } else {
                 const newMed = [...medicines];
-                newMed[index].time.afternoonAfter = Number(e.target.value);
-                newMed[index].time.afternoonBefore = 0;
+                newMed[index].time.afternoonAfterL = Number(e.target.value);
+                newMed[index].time.afternoonBeforeL = 0;
                 setMedicines(newMed);
             }
         }
-        if (e.target.id === 'evening') {
-            if (evening === 'eveningbefore') {
+        else if (e.target.id === 'evening') {
+            if (evening === 'eveningBeforeD') {
                 const newMed = [...medicines];
-                newMed[index].time.eveningBefore = Number(e.target.value);
-                newMed[index].time.eveningAfter = 0;
+                newMed[index].time.eveningBeforeD = Number(e.target.value);
+                newMed[index].time.eveningAfterD = 0;
                 setMedicines(newMed);
                 
             } else {
                 const newMed = [...medicines];
-                newMed[index].time.eveningAfter = Number(e.target.value);
-                newMed[index].time.eveningBefore = 0;
+                newMed[index].time.eveningAfterD = Number(e.target.value);
+                newMed[index].time.eveningBeforeD = 0;
                 setMedicines(newMed);
             }
         }
@@ -92,76 +99,115 @@ function Prescribe(id, patiendId) {
             <div key={index}>
                 <form>
                     <label>Medicine Name</label>
-                    <br />
                     <input type="text" id="name" value={med.name} onChange={(e) => handleClick(e, index)}/>
                     <br />
                     <label>Duration</label>
-                    <br />
                     <input type="number" id="duration" value={med.duration} onChange={(e) => handleClick(e, index)}/>
                     <br />
-                    <label>quantity</label>
-                    <br />
-                    <input type="number" id="quantity" value={med.quantity} onChange={(e) => handleClick(e, index)}/>
-                    <br />
                     <label>Morning</label>
-                    <br />
-                    <br />
                     <select value={morning} onChange={(e) => setMorning(e.target.value)}>
-                        <option value="morningbefore">Before BreadFast</option>
-                        <option value="morningafter">After BreadFast</option>
+                        <option value="morningBeforeB">Before BreadFast</option>
+                        <option value="morningBfterB">After BreadFast</option>
                     </select>
-                    <br />
                     <input 
-                    type="number" 
-                    id="morning" value={morning === 'morningbefore' ? med.time.morningBefore : med.time.morningAfter} 
-                    onChange={(e) => handleClick(e, index)}
+                        type="number" 
+                        id="morning" 
+                        value={morning === 'morningBeforeB' ? med.time.morningBeforeB : med.time.morningAfterB} 
+                        onChange={(e) => handleClick(e, index)}
                     />
                     <br />
                     <label>Afternoon</label>
-                    <br />
-                    <br />
                     <select value={afternoon} onChange={(e) => setAfternoon(e.target.value)}>
-                        <option value="afternoonbefore">Before Lunch</option>
-                        <option value="afternoonafter">After Lunch</option>
+                        <option value="afternoonBeforeL">Before Lunch</option>
+                        <option value="afternoonAfterL">After Lunch</option>
                     </select>
-                    <br />
                     <input 
-                    type="number" 
-                    id="morning" value={afternoon === 'afternoonbefore' ? med.time.afternoonBefore : med.time.afternoonAfter} 
-                    onChange={(e) => handleClick(e, index)}
+                        type="number" 
+                        id="morning" 
+                        value={afternoon === 'afternoonBeforeL' ? med.time.afternoonBeforeL : med.time.afternoonAfterL} 
+                        onChange={(e) => handleClick(e, index)}
                     />
                     <br />
                     <label>Evening</label>
-                    <br />
-                    <br />
                     <select value={evening} onChange={(e) => setEvening(e.target.value)}>
-                        <option value="eveningbefore">Before Dinner</option>
-                        <option value="eveningafter">After Dinner</option>
+                        <option value="eveningBeforeD">Before Dinner</option>
+                        <option value="eveningAfterD">After Dinner</option>
                     </select>
-                    <br />
                     <input 
-                    type="number" 
-                    id="morning" value={evening === 'eveningbefore' ? med.time.eveningBefore : med.time.eveningAfter} 
-                    onChange={(e) => handleClick(e, index)}
+                        type="number" 
+                        id="morning" 
+                        value={evening === 'eveningBeforeD' ? med.time.eveningBeforeD : med.time.eveningAfterD} 
+                        onChange={(e) => handleClick(e, index)}
                     />
                     <br />
-
                 </form>
             </div>
         )
-    })
+    });
+
+    const errorHandler = () => {
+        setError(null);
+    }
+
+    useEffect(() => {
+        const sendRequest = async () => {
+            try{
+                setIsLoading(true);
+                const response = await fetch(`http://localhost:8080/api/patient/info/${patientId}`);
+                const responseData = await response.json();     
+                
+                if(responseData.message){
+                    throw new Error(responseData.message);
+                }
+                
+                setPatient(responseData.patient);
+            }catch(err){
+                console.log(err);
+                setError(err.message);
+            }
+            setIsLoading(false);
+        };
+        sendRequest();
+    },[])
 
     return (
-        <div>
-            <h1>Medicines</h1> 
-            <br />       
-            <br />
-            {PrescribeMed}
-            <button onClick={addMedicine}>+</button>
-            <br />
-            <hr />
-            <button onClick={e => console.log(medicines)}>Submit</button>       
-        </div>
+        <React.Fragment>
+            { error && (
+                <React.Fragment>
+                    <Backdrop onClick={errorHandler} />
+                    <ErrorModal heading="Error Occured!" error={error} />
+                </React.Fragment>
+            )}
+            { isLoading && <LoadingSpinner asOverlay />}
+
+            { !isLoading && patient && (
+                <React.Fragment>
+                    <div>
+                        <h2>{patient.name}</h2>
+                        <p>From {patient.city},{patient.state}</p>
+                        <p>{patient.gender}</p>
+                        <h3>Patient's Problem</h3>
+                        <p>{patient.symptoms}</p>
+                        <h3>Patient's Current Medication</h3>
+                        {patient.currentMedicines.map(m => {
+                            return(
+                                <p>Name {m.medicine} Since {m.startDate}</p>
+                            )
+                        })}
+                    </div>
+                    <div>
+                        <h1>Medicines</h1> 
+                        <br />       
+                        <br />
+                        {PrescribeMed}
+                        <button onClick={addMedicine}>+</button>
+                        <br />
+                        <hr />
+                        <button onClick={e => console.log(medicines)}>Submit</button>       
+                    </div>
+                </React.Fragment>
+            )}
+        </React.Fragment>
     )
 }
 

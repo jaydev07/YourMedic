@@ -53,7 +53,7 @@ const App = () => {
             <ConsultRequests />
           </Route>
 
-          <Route path="/prescribe/medicine" exact>
+          <Route path="/prescribe/medicine/:patientId" exact>
             <Prescribe />
           </Route>
 
