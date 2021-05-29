@@ -107,14 +107,16 @@ const getNonConsultedPatients = async (req,res,next) => {
     let patients=[];
     for(let index=0 ; index<doctorFound.patientIds.length ; index++){
         if(!doctorFound.patients[index].consulted){
-            console.log(doctorFound.patientIds[index].name);
+            console.log(doctorFound.patientIds[index].gender);
             patients.push({
                 id:doctorFound.patientIds[index].id,
                 name:doctorFound.patientIds[index].name,
                 city:doctorFound.patientIds[index].city,
                 state:doctorFound.patientIds[index].state,
                 phoneNo:doctorFound.patientIds[index].phoneNo,
-                startDate:doctorFound.patients[index].startDate  
+                startDate:doctorFound.patients[index].startDate,
+                gender: doctorFound.patientIds[index].gender,
+                age:doctorFound.patientIds[index].age
             });
         }
     }

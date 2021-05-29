@@ -141,7 +141,11 @@ const PatientAuth = () => {
                 }
 
                 auth.login(responseData.patient.id , responseData.patient.token , true);
-                history.push("/addsymptoms");
+                if(responseData.patient.symptoms){
+                    history.push(`/patient/home/${responseData.patient.id}`);
+                }else{
+                    history.push("/addsymptoms");
+                }
             }catch(err){
                 console.log(err);
                 setError(err.message);

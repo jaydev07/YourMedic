@@ -12,12 +12,13 @@ import HomePage from "./authentication/HomePage";
 import PatientAuth from "./authentication/PatientAuth";
 import DoctorAuth from "./authentication/DoctorAuth";
 import ShowAllDoctors from "./patient/pages/ShowAllDoctors";
-import Home from "./patient/pages/Home";
+import PatientHome from "./patient/pages/PatientHome";
 import GetPatients from './doctor/pages/GetPatients';
 import ConsultRequests from './doctor/pages/CosultRequests';
 import AddSymptoms from "./patient/pages/AddSymptoms";
 import Prescribe from './doctor/pages/Prescribe';
 import GetReport from './doctor/pages/GetReport';
+import PatientPage from './doctor/pages/PatientPage';
 
 const App = () => {
 
@@ -53,15 +54,15 @@ const App = () => {
             <ConsultRequests />
           </Route>
 
-          <Route path="/prescribe/medicine" exact>
+          <Route path="/prescribe/medicine/:patientId" exact>
             <Prescribe />
           </Route>
 
-          <Route path="/" exact>
-            <Home />
-          </Route>
+          <Router path="/patient/:patientId" exact>
+            <PatientPage />
+          </Router>
   
-          <Redirect to="/" />
+          <Redirect to="/patients" />
         </Switch>
       )
     }else{
@@ -75,11 +76,11 @@ const App = () => {
             <AddSymptoms />
           </Route>
   
-          <Route path="/" exact>
-            <Home />
+          <Route path="/patient/home/:patientId" exact>
+            <PatientHome />
           </Route>
   
-          <Redirect to="/" />
+          <Redirect to="/showalldoctors" />
         </Switch>
       )
     }

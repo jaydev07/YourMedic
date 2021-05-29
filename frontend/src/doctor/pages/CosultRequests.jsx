@@ -125,6 +125,8 @@ const ConsultRequests = () => {
                                     <p>Starting Date: {patient.startDate}</p>
                                     <p>Phone Number: {patient.phoneNo}</p>
                                     <p>Location: {patient.city}, {patient.state}</p>
+                                    <p>{patient.gender}</p>
+                                    <p>{patient.age}</p>
                                     <button onClick={() => accept(patient.id, patient.name)}>Accept</button>
                                     <button onClick={() => reject(patient.id, patient.name)}>Reject</button>
                                     <hr />

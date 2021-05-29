@@ -172,7 +172,7 @@ const ShowAllDoctors = () => {
                                             <div class="row">
                                                 <p>State: {doctor.state}</p>                           
                                             </div>
-                                            <button className="ConsultBtn" style={{display:"inline-block"}}>Consult</button>         
+                                            <button className="ConsultBtn" style={{display:"inline-block"}} onClick={() => sendConsultRequest(doctor.id,doctor.name)}>Consult</button>         
                                         </div>
                                     </div>                
                                 </div>

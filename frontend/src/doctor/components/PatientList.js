@@ -16,6 +16,8 @@ const PatientList = (props) => {
                         phoneNo={patient.phoneNo}
                         city={patient.city}
                         state={patient.state}
+                        gender={patient.gender}
+                        prescribedMedicines={patient.prescribedMedicines}
                     />
                 )
             })
