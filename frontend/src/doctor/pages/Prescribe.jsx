@@ -1,6 +1,7 @@
 import React,{useState,useContext,useEffect} from "react";
 import {useHistory,Link,useParams} from "react-router-dom";
 
+import './Prescribe.css';
 import {AuthContext} from "../../shared/context/AuthContext";
 import Backdrop from "../../shared/UIElements/Backdrop";
 import ErrorModal from "../../shared/UIElements/ErrorModal";
@@ -98,25 +99,26 @@ const Prescribe = () => {
         return (
             <div key={index}>
                 <form>
-                    <label>Medicine Name</label>
-                    <input type="text" id="name" value={med.name} onChange={(e) => handleClick(e, index)}/>
-                    <br />
-                    <label>Duration</label>
-                    <input type="number" id="duration" value={med.duration} onChange={(e) => handleClick(e, index)}/>
-                    <br />
-                    <label>Morning</label>
+                    <label className="medicine-label">Medicine Name</label>
+                    <input className="form-control medicine-input" type="text" id="name" value={med.name} onChange={(e) => handleClick(e, index)}/>
+                    
+                    <label className="medicine-label">Duration</label>
+                    <input className="form-control medicine-input" type="number" id="duration" value={med.duration} onChange={(e) => handleClick(e, index)}/>
+            
+                    <label className="medicine-label">Morning</label>
                     <select value={morning} onChange={(e) => setMorning(e.target.value)}>
-                        <option value="morningBeforeB">Before BreadFast</option>
+                        <option value="morningBeforeB">Before BreakFast</option>
                         <option value="morningBfterB">After BreadFast</option>
                     </select>
                     <input 
                         type="number" 
                         id="morning" 
+                        className="form-control medicine-input"
                         value={morning === 'morningBeforeB' ? med.time.morningBeforeB : med.time.morningAfterB} 
                         onChange={(e) => handleClick(e, index)}
                     />
-                    <br />
-                    <label>Afternoon</label>
+
+                    <label className="medicine-label">Afternoon</label>
                     <select value={afternoon} onChange={(e) => setAfternoon(e.target.value)}>
                         <option value="afternoonBeforeL">Before Lunch</option>
                         <option value="afternoonAfterL">After Lunch</option>
@@ -124,11 +126,12 @@ const Prescribe = () => {
                     <input 
                         type="number" 
                         id="morning" 
+                        className="form-control medicine-input"
                         value={afternoon === 'afternoonBeforeL' ? med.time.afternoonBeforeL : med.time.afternoonAfterL} 
                         onChange={(e) => handleClick(e, index)}
                     />
-                    <br />
-                    <label>Evening</label>
+
+                    <label className="medicine-label">Evening</label>
                     <select value={evening} onChange={(e) => setEvening(e.target.value)}>
                         <option value="eveningBeforeD">Before Dinner</option>
                         <option value="eveningAfterD">After Dinner</option>
@@ -136,10 +139,10 @@ const Prescribe = () => {
                     <input 
                         type="number" 
                         id="morning" 
+                        className="form-control medicine-input"
                         value={evening === 'eveningBeforeD' ? med.time.eveningBeforeD : med.time.eveningAfterD} 
                         onChange={(e) => handleClick(e, index)}
                     />
-                    <br />
                 </form>
             </div>
         )
@@ -182,29 +185,31 @@ const Prescribe = () => {
 
             { !isLoading && patient && (
                 <React.Fragment>
-                    <div>
-                        <h2>{patient.name}</h2>
-                        <p>From {patient.city},{patient.state}</p>
-                        <p>{patient.gender}</p>
-                        <h3>Patient's Problem</h3>
-                        <p>{patient.symptoms}</p>
-                        <h3>Patient's Current Medication</h3>
-                        {patient.currentMedicines.map(m => {
-                            return(
-                                <p>Name {m.medicine} Since {m.startDate}</p>
-                            )
-                        })}
-                    </div>
-                    <div>
-                        <h1>Medicines</h1> 
-                        <br />       
-                        <br />
-                        {PrescribeMed}
-                        <button onClick={addMedicine}>+</button>
-                        <br />
-                        <hr />
-                        <button onClick={e => console.log(medicines)}>Submit</button>       
-                    </div>
+                        <div className="patient-details">
+                            <h2 className="patient-name"><i class="fas fa-user-circle"></i> {patient.name} <p className="patient-gender">{patient.gender === "Male" ?<i class="fas fa-mars"></i> : <i class="fas fa-venus"></i>} </p></h2>
+                            <p className="patient-city">{patient.city}, {patient.state}</p>
+                        </div>
+
+                        <div className="patient-problem">
+                            <h3 style={{color:'#1E56A0', fontWeight:'700'}}>Patient's Problem</h3>
+                            <p style={{fontSize:'1.3rem'}}>{patient.symptoms}</p>
+                        </div>
+
+                        <div className="patient-medication">                             
+                            <h3 style={{color:'#1E56A0', fontWeight:'700'}}>Patient's Current Medication</h3>
+                            {patient.currentMedicines.map(m => {
+                                return(
+                                    <p><span style={{color:'grey', fontWeight:'600', fontStyle:'italic'}}>Medicine Name</span> <span style={{color:'purple', fontWeight:'600', fontSize:'1.2rem'}}>{m.medicine}</span> 
+                                    <span style={{color:'grey', fontWeight:'600', fontStyle:'italic'}}> since </span> <span style={{color:'purple', fontWeight:'600', fontSize:'1.2rem'}}>{m.startDate}</span></p>
+                                )
+                            })} 
+                        </div>                   
+                        <div className="medicinesDIV">
+                            <h1 style={{color:'#554674', fontWeight:'700'}}><i class="fas fa-capsules"></i> Medicines</h1>
+                            {PrescribeMed}
+                            <button className="btn btn-warning add-btn2" onClick={addMedicine}><i class="fas fa-plus"></i> Add</button>
+                            <button className="btn btn-primary submit-btn2" onClick={e => console.log(medicines)}>Submit</button>       
+                        </div>
                 </React.Fragment>
             )}
         </React.Fragment>
