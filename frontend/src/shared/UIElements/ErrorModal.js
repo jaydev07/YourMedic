@@ -11,6 +11,9 @@ const ErrorModal = (props) => {
             <div className="modal__content">
                 <h5>{props.error}</h5>
             </div>
+            {props.button && (
+                <button onClick={props.handleButton}>OK</button>
+            )}
         </div>
     )
 } 

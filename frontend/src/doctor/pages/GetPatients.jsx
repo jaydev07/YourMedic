@@ -1,10 +1,11 @@
 import React,{useState,useContext,useEffect} from "react";
-import {useHistory} from "react-router-dom";
+import {useHistory,Link} from "react-router-dom";
 
 import {AuthContext} from "../../shared/context/AuthContext";
 import Backdrop from "../../shared/UIElements/Backdrop";
 import ErrorModal from "../../shared/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/UIElements/LoadingSpinner";
+import PatientList from "../components/PatientList";
 
 const GetPatients = () => {
     
@@ -40,18 +41,6 @@ const GetPatients = () => {
         sendRequest();
     }, []);
 
-    // * create a list of cards
-    const totalPatients = patients.map(patient => {
-        return (
-            <div key={patient.id}>
-                <h2>Name: {patient.name}</h2>
-                <h5>Starting Date: {patient.startDate}</h5>
-                <h4>Phone Number: {patient.phoneNo}</h4>
-                <h4>Location: {patient.city}, {patient.state}</h4>
-            </div>
-        )
-    })
-
     return (
         <React.Fragment>
             { error && (
@@ -64,9 +53,18 @@ const GetPatients = () => {
 
             { !isLoading && patients && (
                 <React.Fragment>
-                <h1>Patients</h1>
-                <hr />
-                {totalPatients}  
+                    {patients.length!==0 ? (
+                        <h1>Patients</h1>
+                    ):(
+                        <h1>No active patients</h1>
+                    )}
+                    <Link to="/consultrequests">
+                        See Nonclnsulted Patients
+                    </Link>
+                    <hr />
+                    {patients.length!==0 ? (
+                        <PatientList patients={patients} />
+                    ):null}
                 </React.Fragment>
             )}
         </React.Fragment>

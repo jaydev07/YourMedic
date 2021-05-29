@@ -16,7 +16,7 @@ import Home from "./patient/pages/Home";
 
 import GetPatients from './doctor/pages/GetPatients';
 
-import ConcertRequest from './doctor/pages/ConcertRequest';
+import ConsultRequests from './doctor/pages/CosultRequests';
 
 const App = () => {
 
@@ -48,8 +48,8 @@ const App = () => {
           <GetPatients />
         </Route>
 
-        <Route path="/concertrequests" exact>
-          <ConcertRequest />
+        <Route path="/consultrequests" exact>
+          <ConsultRequests />
         </Route>
 
         <Route path="/" exact>

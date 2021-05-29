@@ -111,7 +111,8 @@ const getNonConsultedPatients = async (req,res,next) => {
             patients.push({
                 id:doctorFound.patientIds[index].id,
                 name:doctorFound.patientIds[index].name,
-                address:doctorFound.patientIds[index].address,
+                city:doctorFound.patientIds[index].city,
+                state:doctorFound.patientIds[index].state,
                 phoneNo:doctorFound.patientIds[index].phoneNo,
                 startDate:doctorFound.patients[index].startDate  
             });
@@ -132,7 +133,7 @@ const getAllDoctors = async (req,res,next) => {
         return next(new HttpError('Something went wrong', 500));
     }
     
-    res.json({doctors});
+    res.json({doctors:doctors.map(doc => doc.toObject({ getters: true })) });
 }
 
 ////////////////////////////////////////////////////////// POST Requests ////////////////////////////////////////////////////////////////
