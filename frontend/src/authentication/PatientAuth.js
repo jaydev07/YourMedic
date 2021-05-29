@@ -1,13 +1,22 @@
-import React,{useState} from "react";
+import React,{useState,useContext} from "react";
+import {useHistory} from "react-router-dom";
 
 import "./PatientAuth.css";
 import {useForm} from "../shared/hoocks/form-hook";
 import Input from "../shared/components/Input";
+import {AuthContext} from "../shared/context/AuthContext";
 import {VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE} from "../shared/components/validators";
+import Backdrop from "../shared/UIElements/Backdrop";
+import ErrorModal from "../shared/UIElements/ErrorModal";
+import LoadingSpinner from "../shared/UIElements/LoadingSpinner";
 
 const PatientAuth = () => {
 
+    const auth = useContext(AuthContext);
+    const history = useHistory();
     const [isLogin , setIsLogin] = useState(true);
+    const [isLoading , setIsLoading] = useState(false);
+    const [error , setError] = useState();
 
     const [gender,setGender] = useState("Male");
     const [formState, inputHandler, setFormData] = useForm(
@@ -72,14 +81,86 @@ const PatientAuth = () => {
         const newGender = event.target.value;
         setGender(newGender);
     }
+    // To handle error
+    const errorHandler = () => {
+        setError(null);
+    }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(formState.inputs,gender);
+        if(!isLogin){
+            try{
+                setIsLoading(true);
+                const response = await fetch("http://localhost:8080/api/patient/signup",{
+                    method:'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name:formState.inputs.name.value,
+                        email:formState.inputs.email.value,
+                        password:formState.inputs.password.value,
+                        phoneNo:formState.inputs.phoneNo.value,
+                        city:formState.inputs.city.value,
+                        state:formState.inputs.state.value,
+                        age:formState.inputs.age.value,
+                        gender:gender
+                    })
+                });
+                const responseData = await response.json();
+
+                if(responseData.message){
+                    throw new Error(responseData.message);
+                }
+
+                auth.login(responseData.patient.id , responseData.patient.token);
+
+                history.push("/showalldoctors");
+            }catch(err){
+                console.log(err);
+                setError(err.message);
+            }
+            setIsLoading(false);
+        }else{
+            try{
+                setIsLoading(true);
+                const response = await fetch("http://localhost:8080/api/patient/login",{
+                    method:'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email:formState.inputs.email.value,
+                        password:formState.inputs.password.value
+                    })
+                });
+                const responseData = await response.json();
+
+                if(responseData.message){
+                    throw new Error(responseData.message);
+                }
+
+                auth.login(responseData.patient.id , responseData.patient.token);
+                history.push("/showalldoctors");
+            }catch(err){
+                console.log(err);
+                setError(err.message);
+            }
+            setIsLoading(false);
+        }
     }
 
     return(
         <React.Fragment>
+
+            { error && (
+                <React.Fragment>
+                    <Backdrop onClick={errorHandler} />
+                    <ErrorModal heading="Error Occured!" error={error} />
+                </React.Fragment>
+            )}
+            { isLoading && <LoadingSpinner asOverlay />}
+
             <h1>Patient {isLogin ? "Login":"Signup"}</h1>
             <form className="auth-form">
 
