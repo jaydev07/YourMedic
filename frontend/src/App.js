@@ -17,6 +17,7 @@ import GetPatients from './doctor/pages/GetPatients';
 import ConsultRequests from './doctor/pages/CosultRequests';
 import AddSymptoms from "./patient/pages/AddSymptoms";
 import Prescribe from './doctor/pages/Prescribe';
+import GetReport from './doctor/pages/GetReport';
 import PatientPage from './doctor/pages/PatientPage';
 
 const App = () => {
@@ -97,6 +98,11 @@ const App = () => {
             <Route path="/auth/patient" exact>
               <PatientAuth />
             </Route>
+            
+            <Route path="/report" exact>
+              <GetReport />
+            </Route>
+
 
             <Redirect to="/" />
       </Switch>
