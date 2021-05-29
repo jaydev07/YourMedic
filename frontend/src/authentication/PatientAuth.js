@@ -1,4 +1,5 @@
 import React,{useState,useContext} from "react";
+import {useHistory} from "react-router-dom";
 
 import "./PatientAuth.css";
 import {useForm} from "../shared/hoocks/form-hook";
@@ -12,6 +13,7 @@ import LoadingSpinner from "../shared/UIElements/LoadingSpinner";
 const PatientAuth = () => {
 
     const auth = useContext(AuthContext);
+    const history = useHistory();
     const [isLogin , setIsLogin] = useState(true);
     const [isLoading , setIsLoading] = useState(false);
     const [error , setError] = useState();
@@ -86,7 +88,6 @@ const PatientAuth = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(formState.inputs,gender);
         if(!isLogin){
             try{
                 setIsLoading(true);
@@ -113,6 +114,8 @@ const PatientAuth = () => {
                 }
 
                 auth.login(responseData.patient.id , responseData.patient.token);
+
+                history.push("/showalldoctors");
             }catch(err){
                 console.log(err);
                 setError(err.message);
@@ -138,6 +141,7 @@ const PatientAuth = () => {
                 }
 
                 auth.login(responseData.patient.id , responseData.patient.token);
+                history.push("/showalldoctors");
             }catch(err){
                 console.log(err);
                 setError(err.message);

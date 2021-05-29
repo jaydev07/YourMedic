@@ -91,7 +91,6 @@ const DoctorAuth = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(formState.inputs,gender);
         if(!isLogin){
             try{
                 setIsLoading(true);

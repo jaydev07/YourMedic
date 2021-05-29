@@ -11,7 +11,8 @@ import {AuthContext} from "./shared/context/AuthContext";
 import HomePage from "./authentication/HomePage";
 import PatientAuth from "./authentication/PatientAuth";
 import DoctorAuth from "./authentication/DoctorAuth";
-import ShowAllDoctors from "./patient/ShowAllDoctors";
+import ShowAllDoctors from "./patient/pages/ShowAllDoctors";
+import Home from "./patient/pages/Home";
 
 const App = () => {
 
@@ -35,8 +36,12 @@ const App = () => {
   if(isLogedIn){
     routes = (
       <Switch>
-        <Route path="/" exact>
+        <Route path="/showalldoctors" exact>
           <ShowAllDoctors />
+        </Route>
+
+        <Route path="/" exact>
+          <Home />
         </Route>
 
         <Redirect to="/" />

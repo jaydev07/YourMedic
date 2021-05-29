@@ -1,11 +1,11 @@
 import React from "react";
 
-const ShowAllDoctors = () => {
+const Home = () => {
     return(
         <React.Fragment>
-            <h1>Show all doctors</h1>
+            <h1>Home</h1>
         </React.Fragment>
     );
 }
 
-export default ShowAllDoctors;
+export default Home;
