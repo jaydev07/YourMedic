@@ -70,7 +70,7 @@ const Input = (props) => {
         <div className={`form-control ${!inputState.isValid && inputState.isTouch && 'form-control--invalid'}`}>
             <label htmlFor={props.id}>{props.label}</label>
             {element}
-            { !inputState.isValid && inputState.isTouch && <p>{props.errorText}</p> }
+            { !inputState.isValid && inputState.isTouch && <p style={{marginTop:'2%'}}><i class="fas fa-exclamation-triangle" style={{color:'red'}}></i> {props.errorText}</p> }
         </div>
     )
 }
