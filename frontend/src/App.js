@@ -21,48 +21,67 @@ import Prescribe from './doctor/pages/Prescribe';
 const App = () => {
 
   const [isLogedIn , setIsLogedIn] = useState(false);
+  const [isPatient , setIsPatient] = useState(true);
   const [userId , setUserId] = useState();
   const [token , setToken] = useState();
 
-  const login = useCallback((userId,token) => {
+  const login = useCallback((userId,token,isPatient) => {
     setIsLogedIn(true);
     setUserId(userId);
     setToken(token);
+    setIsPatient(isPatient);
   },[]);
 
   const logout = useCallback((userId) => {
     setIsLogedIn(false);
     setUserId(null);
     setToken(null);
+    setIsPatient(null);
   },[]);
 
   let routes;
   if(isLogedIn){
-    routes = (
-      <Switch>
-        <Route path="/showalldoctors" exact>
-          <ShowAllDoctors />
-        </Route>
+    if(!isPatient){
+      routes = (
+        <Switch>
+          <Route path="/patients" exact>
+            <GetPatients />
+          </Route>
 
-        <Route path="/patients" exact>
-          <GetPatients />
-        </Route>
+          <Route path="/consultrequests" exact>
+            <ConsultRequests />
+          </Route>
 
-        <Route path="/consultrequests" exact>
-          <ConsultRequests />
-        </Route>
+          <Route path="/prescribe/medicine" exact>
+            <Prescribe />
+          </Route>
 
-        <Route path="/addsymptoms" exact>
-          <AddSymptoms />
-        </Route>
-
-        <Route path="/" exact>
-          <Home />
-        </Route>
-
-        <Redirect to="/" />
-      </Switch>
-    )
+          <Route path="/" exact>
+            <Home />
+          </Route>
+  
+          <Redirect to="/" />
+        </Switch>
+      )
+    }else{
+      routes = (
+        <Switch>
+          <Route path="/showalldoctors" exact>
+            <ShowAllDoctors />
+          </Route>
+  
+          <Route path="/addsymptoms" exact>
+            <AddSymptoms />
+          </Route>
+  
+          <Route path="/" exact>
+            <Home />
+          </Route>
+  
+          <Redirect to="/" />
+        </Switch>
+      )
+    }
   }else{
     routes = (
       <Switch>
@@ -86,6 +105,7 @@ const App = () => {
   return(
     <AuthContext.Provider value={{
       isLogedIn:isLogedIn,
+      isPatient:isPatient,
       userId:userId,
       token:token,
       login:login,

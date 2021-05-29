@@ -119,7 +119,7 @@ const DoctorAuth = () => {
                     throw new Error(responseData.message);
                 }
 
-                auth.login(responseData.doctor.id , responseData.token);
+                auth.login(responseData.doctor.id , responseData.token , false);
                 history.push("/patients");
             }catch(err){
                 console.log(err);
@@ -145,7 +145,7 @@ const DoctorAuth = () => {
                     throw new Error(responseData.message);
                 }
 
-                auth.login(responseData.doctor.id , responseData.token);
+                auth.login(responseData.doctor.id , responseData.token , false);
                 history.push("/patients");
             }catch(err){
                 console.log(err);

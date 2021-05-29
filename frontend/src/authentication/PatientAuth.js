@@ -113,7 +113,7 @@ const PatientAuth = () => {
                     throw new Error(responseData.message);
                 }
 
-                auth.login(responseData.patient.id , responseData.patient.token);
+                auth.login(responseData.patient.id , responseData.patient.token , true);
 
                 history.push("/addsymptoms");
             }catch(err){
@@ -140,7 +140,7 @@ const PatientAuth = () => {
                     throw new Error(responseData.message);
                 }
 
-                auth.login(responseData.patient.id , responseData.patient.token);
+                auth.login(responseData.patient.id , responseData.patient.token , true);
                 history.push("/addsymptoms");
             }catch(err){
                 console.log(err);

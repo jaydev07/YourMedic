@@ -1,10 +1,14 @@
 import React,{useState,useContext, useEffect} from "react";
 import {useHistory} from "react-router-dom";
 
+import "./ShowAllDoctors.css";
+import BackgroungImg from '../../Photos/DrListGg.jpg';
 import {AuthContext} from "../../shared/context/AuthContext";
 import Backdrop from "../../shared/UIElements/Backdrop";
 import ErrorModal from "../../shared/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/UIElements/LoadingSpinner";
+import DrM from '../../Photos/Dr_M.svg';
+import DrF from '../../Photos/Dr_F.svg';
 
 const ShowAllDoctors = () => {
 
@@ -127,27 +131,56 @@ const ShowAllDoctors = () => {
             )}
             { isLoading && <LoadingSpinner asOverlay />}
 
-            <h1>List of Doctors</h1>
-            <button onClick={getDoctosNearBy}>{showAllDoctors ? "Get doctors near by" : "Show all doctors"}</button>
+            <div style={{backgroundImage: `url(${BackgroungImg})`,backgroundSize:"contain", minHeight:"100%"}}>
+                <p className="Title" style={{float:"left",backgroundImage: `url(${BackgroungImg})`,fontSize:"4em"}}>List of Doctors</p>
+                <div style={{clear:"both"}}>
+                    <button className="NearByBtn" onClick={getDoctosNearBy}>{showAllDoctors ? "Get doctors near by" : "Show all doctors"}</button>
+                </div>
 
-            { !isLoading && doctors && (
-                doctors.map(doctor => {
-                    return(
-                        <div key={doctor.id}>
-                            <h5>Name: {doctor.name}</h5>
-                            <p>Email: {doctor.email}</p>
-                            <p>Contact No.: {doctor.phoneNo}</p>
-                            <p>City: {doctor.city}</p>
-                            <p>State: {doctor.state}</p>
-                            {doctor.gender==="Male" ? "M" : "F"}
-                            <p>Designation: {doctor.designation}</p>
-                            <p>Current Patients: {doctor.currentPatientsLength}</p>
-                            <button onClick={() => sendConsultRequest(doctor.id,doctor.name)}>Consult</button>
-                            <br />
-                        </div>
-                    )
-                })
-            )}
+                { !isLoading && doctors && (
+                    doctors.map(doctor => {
+                        return(
+                            <React.Fragment>                   
+                                <div className="DocBox container" style={{background:"white" ,boxShadow:"rgba(0, 0, 0, 0.24) 2px 8px 20px",clear:"both",paddingTop:"2%",padding:"1% 3% 1%",margin:"1% 10% 1%",width:"80%",borderRadius:"15px"}}> 
+                                    <div className="row">
+                                        <div className="col-2">
+                                            <div className="row">
+                                                {doctor.gender==="Male" ? <img style={{width: 80,height: 80,borderRadius:100}} src={DrM} alt="Male Dr." /> : <img style={{width: 80,height: 55,borderRadius:80}} src={DrF} alt="Female Dr." /> }
+                                            </div>
+                                            <div className="row">
+                                                <h5>{doctor.name}</h5>      
+                                            </div>
+                                        </div>                
+                                        <div className="col-5">
+                                            <div class="row">
+                                                <p>Designation: {doctor.designation}</p>
+                                            </div>
+                                            <div class="row">
+                                                <p>Email: {doctor.email}</p>
+                                            </div>
+                                            <div class="row">
+                                                <p>Contact No.: {doctor.phoneNo}</p>
+                                            </div>
+                                            <div class="row">
+                                                <p>Current Patients: {doctor.currentPatientsLength}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="row">
+                                                <p>City: {doctor.city}</p>
+                                            </div>
+                                            <div class="row">
+                                                <p>State: {doctor.state}</p>                           
+                                            </div>
+                                            <button className="ConsultBtn" style={{display:"inline-block"}}>Consult</button>         
+                                        </div>
+                                    </div>                
+                                </div>
+                            </React.Fragment>
+                        );
+                    })
+                )}
+            </div>
         </React.Fragment>
     );
 }
