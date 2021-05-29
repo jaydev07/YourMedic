@@ -17,6 +17,7 @@ import GetPatients from './doctor/pages/GetPatients';
 import ConsultRequests from './doctor/pages/CosultRequests';
 import AddSymptoms from "./patient/pages/AddSymptoms";
 import Prescribe from './doctor/pages/Prescribe';
+import PatientPage from './doctor/pages/PatientPage';
 
 const App = () => {
 
@@ -55,6 +56,10 @@ const App = () => {
           <Route path="/prescribe/medicine" exact>
             <Prescribe />
           </Route>
+
+          <Router path="/patient/:patientId" exact>
+            <PatientPage />
+          </Router>
 
           <Route path="/" exact>
             <Home />
