@@ -1,6 +1,6 @@
 #wrapper {
     min-height: 100%;
-    background-image: url("F:/Web Development/Covid-WebApp/COVID-Home-Management/frontend/src/Photos/PATIENT-bg.svg")!important;
+    background-image: url("../Photos/PATIENT-bg.svg")!important;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
@@ -11,7 +11,7 @@
 
 #wrapper2 {
     min-height: 100%;
-    background-image: url("F:/Web Development/Covid-WebApp/COVID-Home-Management/frontend/src/Photos/DOCTOR-bg.jpg")!important;
+    background-image: url("../Photos/DOCTOR-bg.jpg")!important;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;

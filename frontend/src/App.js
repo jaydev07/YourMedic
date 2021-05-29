@@ -14,9 +14,9 @@ import DoctorAuth from "./authentication/DoctorAuth";
 import ShowAllDoctors from "./patient/pages/ShowAllDoctors";
 import Home from "./patient/pages/Home";
 
-import { GetPatients } from './doctor/getPatients';
+import GetPatients from './doctor/pages/GetPatients';
 
-import { ConcertRequest } from './doctor/ConcertRequest';
+import ConcertRequest from './doctor/pages/ConcertRequest';
 
 const App = () => {
 
@@ -45,11 +45,11 @@ const App = () => {
         </Route>
 
         <Route path="/patients" exact>
-            <GetPatients />
+          <GetPatients />
         </Route>
 
         <Route path="/concertrequests" exact>
-            <ConcertRequest />
+          <ConcertRequest />
         </Route>
 
         <Route path="/" exact>
