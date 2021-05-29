@@ -153,7 +153,7 @@ const DoctorAuth = () => {
 
     return(
         <React.Fragment>
-
+        <div id="wrapper2">
             { error && (
                 <React.Fragment>
                     <Backdrop onClick={errorHandler} />
@@ -161,103 +161,114 @@ const DoctorAuth = () => {
                 </React.Fragment>
             )}
             { isLoading && <LoadingSpinner asOverlay />}
+            <div className="signin">
+                <h1 className='title'>Doctor {isLogin ? "Login":"Signup"}</h1>
+                <form className="auth-form">
 
-            <h1>Doctor {isLogin ? "Login":"Signup"}</h1>
-            <form className="auth-form">
+                    { !isLogin && (
+                        <React.Fragment>
+                            <Input 
+                                id="name"
+                                element="input"
+                                type="text"
+                                label="Your Name"
+                                className="form-control"
+                                value={formState.inputs.name.value}
+                                onInput={inputHandler}
+                                validators={[VALIDATOR_REQUIRE()]}
+                                errorText="User name is required"
+                            />
+                            <Input 
+                                id="phoneNo"
+                                element="input"
+                                type="text"
+                                label="Contact No."
+                                className="form-control"
+                                value={formState.inputs.phoneNo.value}
+                                onInput={inputHandler}
+                                validators={[VALIDATOR_MINLENGTH(10)]}
+                                errorText="Please enter a valid contact number"
+                            />
+                        </React.Fragment>
+                    )}
+                    <Input 
+                        id="email"
+                        element="input"
+                        type="text"
+                        label="Email"
+                        className="form-control"
+                        value={formState.inputs.email.value}
+                        onInput={inputHandler}
+                        validators={[VALIDATOR_EMAIL()]}
+                        errorText="Please enter a valid email address"
+                    />
+                    <Input 
+                        id="password"
+                        element="input"
+                        type="password"
+                        label="Password"
+                        className="form-control"
+                        value={formState.inputs.password.value}
+                        onInput={inputHandler}
+                        validators={[VALIDATOR_MINLENGTH(6)]}
+                        errorText="Please enter a password of minimum 6 characters"
+                    />
 
-                { !isLogin && (
-                    <React.Fragment>
-                        <Input 
-                            id="name"
-                            element="input"
-                            type="text"
-                            label="Your Name"
-                            value={formState.inputs.name.value}
-                            onInput={inputHandler}
-                            validators={[VALIDATOR_REQUIRE()]}
-                            errorText="User name is required"
-                        />
-                        <Input 
-                            id="phoneNo"
-                            element="input"
-                            type="text"
-                            label="Contact No."
-                            value={formState.inputs.phoneNo.value}
-                            onInput={inputHandler}
-                            validators={[VALIDATOR_MINLENGTH(10)]}
-                            errorText="Please enter a valid contact number"
-                        />
-                    </React.Fragment>
-                )}
-                <Input 
-                    id="email"
-                    element="input"
-                    type="text"
-                    label="Email"
-                    value={formState.inputs.email.value}
-                    onInput={inputHandler}
-                    validators={[VALIDATOR_EMAIL()]}
-                    errorText="Please enter a valid email address"
-                />
-                <Input 
-                    id="password"
-                    element="input"
-                    type="password"
-                    label="Password"
-                    value={formState.inputs.password.value}
-                    onInput={inputHandler}
-                    validators={[VALIDATOR_MINLENGTH(6)]}
-                    errorText="Please enter a password of minimum 6 characters"
-                />
-
-                {!isLogin && (
-                    <React.Fragment>
-                        <Input 
-                            id="city"
-                            element="input"
-                            type="text"
-                            label="City"
-                            value={formState.inputs.city.value}
-                            onInput={inputHandler}
-                            validators={[VALIDATOR_REQUIRE()]}
-                            errorText="City name is required."
-                        />
-                        <Input 
-                            id="state"
-                            element="input"
-                            type="text"
-                            label="State"
-                            value={formState.inputs.state.value}
-                            onInput={inputHandler}
-                            validators={[VALIDATOR_REQUIRE()]}
-                            errorText="State name is required."
-                        />
-                        <Input 
-                            id="doctorLicense"
-                            element="input"
-                            type="text"
-                            label="Your License"
-                            value={formState.inputs.doctorLicense.value}
-                            onInput={inputHandler}
-                            validators={[VALIDATOR_REQUIRE()]}
-                            errorText="Please enter a valid doctor license."
-                        />
-                        <label>Your Designation</label>
-                        <select value={designation} onChange={handleDesignationSelect}>
-                            <option value="M.D">M.D</option>
-                            <option value="M.B.B.S">M.B.B.S</option>
-                        </select>
-                        <label>Gender</label>
-                        <select value={gender} onChange={handleGenderSelect}>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            <option value="Others">Others</option>
-                        </select>
-                    </React.Fragment>
-                )}
-                <button disabled={!formState.isValid} onClick={handleSubmit}>{isLogin ? "Login":"Signup"}</button>
-            </form>
-            <button onClick={handleSwitch}>Switch to {!isLogin ? "Login":"Signup"}</button>
+                    {!isLogin && (
+                        <React.Fragment>
+                            <Input 
+                                id="city"
+                                element="input"
+                                type="text"
+                                label="City"
+                                className="form-control"
+                                value={formState.inputs.city.value}
+                                onInput={inputHandler}
+                                validators={[VALIDATOR_REQUIRE()]}
+                                errorText="City name is required."
+                            />
+                            <Input 
+                                id="state"
+                                element="input"
+                                type="text"
+                                label="State"
+                                className="form-control"
+                                value={formState.inputs.state.value}
+                                onInput={inputHandler}
+                                validators={[VALIDATOR_REQUIRE()]}
+                                errorText="State name is required."
+                            />
+                            <Input 
+                                id="doctorLicense"
+                                element="input"
+                                type="text"
+                                label="Your License"
+                                className="form-control"
+                                value={formState.inputs.doctorLicense.value}
+                                onInput={inputHandler}
+                                validators={[VALIDATOR_REQUIRE()]}
+                                errorText="Please enter a valid doctor license."
+                            />
+                            
+                            <label className="genderText">Your Designation</label>                            
+                            <select className="designationDD" value={designation} onChange={handleDesignationSelect}>
+                                <option value="M.D">M.D</option>
+                                <option value="M.B.B.S">M.B.B.S</option>
+                            </select>
+                            
+                            <label className="genderText">Gender</label>
+                            <select className='genderDD' value={gender} onChange={handleGenderSelect}>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </React.Fragment>
+                    )}
+                    <button className="btn login-btn2" disabled={!formState.isValid} onClick={handleSubmit}>{isLogin ? "Login":"Signup"}</button>
+                </form>
+                <button className="btn btn-success switch-btn" onClick={handleSwitch}>Switch to {!isLogin ? "Login":"Signup"}</button>
+            </div>
+        </div>
         </React.Fragment>
     )
 }
