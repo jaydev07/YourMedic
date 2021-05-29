@@ -5,12 +5,12 @@ import {AuthContext} from "../../shared/context/AuthContext";
 import Backdrop from "../../shared/UIElements/Backdrop";
 import ErrorModal from "../../shared/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/UIElements/LoadingSpinner";
-import PatientList from "../components/PatientList";
 
 const Prescribe = () => {
 
     const patientId = useParams().patientId;
     const auth = useContext(AuthContext);
+    const history = useHistory();
     const [isLoading , setIsLoading] = useState(false);
     const [error , setError] = useState();
     const [patient , setPatient] = useState();
@@ -149,6 +149,33 @@ const Prescribe = () => {
         setError(null);
     }
 
+    const submitHandler = async (event) => {
+        event.preventDefault();
+        try{
+            setIsLoading(true);
+            const response = await fetch(`http://localhost:8080/api/medicine/add`,{
+                method:'POST',
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    doctorId:auth.userId,
+                    patientId:patientId,
+                    medicines:medicines,    
+                })
+            });
+            const responseData = await response.json();
+            if(responseData.message !== "medicine added successfully"){
+                throw new Error(responseData.message);
+            }
+            history.push(`/patient/${patientId}`);
+        }catch(err){
+            console.log(err);
+            setError(err.message);
+        }
+        setIsLoading(false);
+    }
+
     useEffect(() => {
         const sendRequest = async () => {
             try{
@@ -197,13 +224,11 @@ const Prescribe = () => {
                     </div>
                     <div>
                         <h1>Medicines</h1> 
-                        <br />       
                         <br />
                         {PrescribeMed}
                         <button onClick={addMedicine}>+</button>
                         <br />
-                        <hr />
-                        <button onClick={e => console.log(medicines)}>Submit</button>       
+                        <button onClick={submitHandler}>Submit</button>       
                     </div>
                 </React.Fragment>
             )}
