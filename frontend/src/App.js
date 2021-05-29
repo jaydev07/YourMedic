@@ -14,6 +14,10 @@ import DoctorAuth from "./authentication/DoctorAuth";
 import ShowAllDoctors from "./patient/pages/ShowAllDoctors";
 import Home from "./patient/pages/Home";
 
+import { GetPatients } from './doctor/getPatients';
+
+import { ConcertRequest } from './doctor/ConcertRequest';
+
 const App = () => {
 
   const [isLogedIn , setIsLogedIn] = useState(false);
@@ -38,6 +42,14 @@ const App = () => {
       <Switch>
         <Route path="/showalldoctors" exact>
           <ShowAllDoctors />
+        </Route>
+
+        <Route path="/patients" exact>
+            <GetPatients />
+        </Route>
+
+        <Route path="/concertrequests" exact>
+            <ConcertRequest />
         </Route>
 
         <Route path="/" exact>

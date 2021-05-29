@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 export const GetPatients = () => {
     
-    const [patients, setPatients] = useState();
+    const [patients, setPatients] = useState([]);
 
     // get patients from backend
     useEffect(() => {
@@ -19,6 +19,7 @@ export const GetPatients = () => {
         return (
             <div key={patient.id}>
                 <h2>Name: {patient.name}</h2>
+                <h5>Starting Date: {patient.startDate}</h5>
                 <h4>Phone Number: {patient.phoneNo}</h4>
                 <h4>Location: {patient.city}, {patient.state}</h4>
             </div>
