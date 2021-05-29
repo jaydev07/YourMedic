@@ -18,6 +18,8 @@ import GetPatients from './doctor/pages/GetPatients';
 
 import ConsultRequests from './doctor/pages/CosultRequests';
 
+import Prescribe from './doctor/pages/Prescribe';
+
 const App = () => {
 
   const [isLogedIn , setIsLogedIn] = useState(false);
@@ -50,6 +52,11 @@ const App = () => {
 
         <Route path="/consultrequests" exact>
           <ConsultRequests />
+        </Route>
+
+        {/* // * prescribe medicine */}
+        <Route path="/prescribe" exact>
+          <Prescribe />
         </Route>
 
         <Route path="/" exact>
