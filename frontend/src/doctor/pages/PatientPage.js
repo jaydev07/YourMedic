@@ -99,7 +99,7 @@ const PatientPage = () => {
                 }
                 const newStateo = stateo;
                 newStateo.labels = xo;
-                newStateo.datasets.data = yo;
+                newStateo.datasets[0].data = yo;
                 setStateo(newStateo);
                 
                 for (const re of responseData.patient.reports[responseData.patient.reports.length-1].temperature) {
@@ -108,7 +108,7 @@ const PatientPage = () => {
                 }
                 const newStateb = stateb;
                 newStateb.labels = xb;
-                newStateb.datasets.data = yb;
+                newStateb.datasets[0].data = yb;
                 setStateb(newStateb);
                 
                 for (const re of responseData.patient.reports[responseData.patient.reports.length-1].pulse) {
@@ -117,7 +117,7 @@ const PatientPage = () => {
                 }
                 const newStatep = statep;
                 newStatep.labels = xp;
-                newStatep.datasets.data = yp;
+                newStatep.datasets[0].data = yp;
                 setStateo(newStatep);
                 setReport(responseData.patient);
             }catch(err){
@@ -145,29 +145,29 @@ const PatientPage = () => {
         for (const re of report.reports[findDateIndex].oxygen) {
             xo.push(re.time);
             yo.push(re.level);
-            const newStateo = stateo;
-            newStateo.labels = xo;
-            newStateo.datasets.data = yo;
-            setStateo(newStateo);
         }
+        const newStateo = stateo;
+        newStateo.labels = xo;
+        newStateo.datasets[0].data = yo;
+        setStateo(newStateo);
         
         for (const re of report.reports[findDateIndex].temperature) {
             xb.push(re.time);
             yb.push(re.level);
-            const newStateb = stateb;
-            newStateb.labels = xb;
-            newStateb.datasets.data = yb;
-            setStateb(newStateb);
         }
+        const newStateb = stateb;
+        newStateb.labels = xb;
+        newStateb.datasets[0].data = yb;
+        setStateb(newStateb);
         
         for (const re of report.reports[findDateIndex].pulse) {
             xp.push(re.time);
             yp.push(re.level);
-            const newStatep = statep;
-            newStatep.labels = xp;
-            newStatep.datasets.data = yp;
-            setStateo(newStatep);
         }
+        const newStatep = statep;
+        newStatep.labels = xp;
+        newStatep.datasets[0].data = yp;
+        setStateo(newStatep);
     }
 
     return (
@@ -227,7 +227,6 @@ const PatientPage = () => {
                             </select>
                         )}
                         <h2>SpO2 Level</h2>
-                        {console.log(stateo)}
                         <Line
                             data={stateo}
                             options={{

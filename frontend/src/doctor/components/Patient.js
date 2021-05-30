@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import "./Patient.css";
 import PntM from '../../Photos/Pnt_M.svg';
 import PntF from '../../Photos/Pnt_F.svg';
+import BgImg from '../../Photos/DesktopBg.png';
 
 import "./Patient.css";
 import DrM from '../../Photos/Dr_M.svg';
