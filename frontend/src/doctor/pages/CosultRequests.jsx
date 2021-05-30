@@ -1,6 +1,10 @@
 import React,{useState,useContext,useEffect} from "react";
 import {useHistory} from "react-router-dom";
 
+import "./ConsultRequests.css";
+import BackgroungImg from '../../Photos/DrListGg.jpg';
+import DrM from '../../Photos/Dr_M.svg';
+import DrF from '../../Photos/Dr_F.svg';
 import {AuthContext} from "../../shared/context/AuthContext";
 import Backdrop from "../../shared/UIElements/Backdrop";
 import ErrorModal from "../../shared/UIElements/ErrorModal";
@@ -120,16 +124,38 @@ const ConsultRequests = () => {
                     {
                         patients.map(patient => {
                             return (
-                                <div key={patient.id}>
-                                    <h5>Name: {patient.name}</h5>
-                                    <p>Starting Date: {patient.startDate}</p>
-                                    <p>Phone Number: {patient.phoneNo}</p>
-                                    <p>Location: {patient.city}, {patient.state}</p>
-                                    <p>{patient.gender}</p>
-                                    <p>{patient.age}</p>
-                                    <button onClick={() => accept(patient.id, patient.name)}>Accept</button>
-                                    <button onClick={() => reject(patient.id, patient.name)}>Reject</button>
-                                    <hr />
+                                <div key={patient.id} className="DocBox container" style={{background:"white" ,boxShadow:"rgba(0, 0, 0, 0.24) 2px 8px 20px",clear:"both",paddingTop:"2%",padding:"1% 3% 1%",margin:"1% 10% 1%",width:"80%",borderRadius:"15px"}}> 
+                                    <div className="row">                    
+                                        <div className="col-2">
+                                            {/*<div className="row">
+                                                {props.gender==="Male" ? <img style={{width: 80,height: 80,borderRadius:100}} src={DrM} alt="Male Patient" /> : <img style={{width: 80,height: 55,borderRadius:80}} src={DrF} alt="Female Patient" /> }
+                                            </div>*/}
+                                            <div className="row">
+                                                <h5>{patient.name}</h5>      
+                                            </div>
+                                        </div>     
+                                        <div className="col-5">                        
+                                            <div class="row">
+                                                <p>Starting Date: {patient.startDate}</p>
+                                            </div>
+                                            <div class="row">
+                                                <p>Phone Number: {patient.phoneNo}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="row">
+                                                <p>Location: {patient.city}, {patient.state}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="row justify-content-md-center">    
+                                        <div class="col-6">
+                                            <button style={{display:"inline-block",float:"right"}} className="AcceptBtn col-4" onClick={() => accept(patient.id, patient.name)}>Accept</button>    
+                                        </div>               
+                                        <div class="col-6">
+                                            <button style={{display:"inline-block",float:"left"}} className="RejectBtn col-4" onClick={() => reject(patient.id, patient.name)}>Reject</button>                                 
+                                        </div>                                                                                                  
+                                    </div>
                                 </div>
                             )
                         })
