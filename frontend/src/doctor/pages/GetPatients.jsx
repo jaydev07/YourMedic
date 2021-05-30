@@ -67,7 +67,7 @@ const GetPatients = () => {
                         )}
                         <div style={{clear:"both"}}>
                             <Link to="/consultrequests">
-                                <button className="NonCulPntBtn">See Nonconsulted Patients</button>
+                                <button className="btn NonCulPntBtn">See Non-consulted Patients</button>
                             </Link>
                         </div>
                         {patients.length!==0 ? (

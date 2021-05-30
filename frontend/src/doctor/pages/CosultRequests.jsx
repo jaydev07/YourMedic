@@ -153,10 +153,10 @@ const ConsultRequests = () => {
                                         </div>
                                         <div className="row justify-content-md-center">    
                                             <div class="col-6">
-                                                <button style={{display:"inline-block",float:"right"}} className="AcceptBtn col-4" onClick={() => accept(patient.id, patient.name)}>Accept</button>    
+                                                <button style={{display:"inline-block",float:"right"}} className="btn btn-success AcceptBtn col-4" onClick={() => accept(patient.id, patient.name)}>Accept</button>    
                                             </div>               
                                             <div class="col-6">
-                                                <button style={{display:"inline-block",float:"left"}} className="RejectBtn col-4" onClick={() => reject(patient.id, patient.name)}>Reject</button>                                 
+                                                <button style={{display:"inline-block",float:"left"}} className="btn btn-danger RejectBtn col-4" onClick={() => reject(patient.id, patient.name)}>Reject</button>                                 
                                             </div>                                                                                                  
                                         </div>                                                
 

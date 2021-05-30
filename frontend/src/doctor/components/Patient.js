@@ -31,7 +31,7 @@ const Patient = (props) => {
                             <p>Location: {props.city}, {props.state}</p>
                         </div>
                         <Link to={props.prescribedMedicines.length === 0 ? "/prescribe/medicine" : `/patient/${props.id}`}>                      
-                            <button className="ViewBtn" style={{display:"inline-block"}}>View</button>         
+                            <button className="btn ViewBtn" style={{display:"inline-block",fontWeight:"600"}}>View</button>         
                         </Link>           
                     </div>
                 </div>
