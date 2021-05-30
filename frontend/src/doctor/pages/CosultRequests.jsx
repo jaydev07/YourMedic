@@ -10,6 +10,11 @@ import Backdrop from "../../shared/UIElements/Backdrop";
 import ErrorModal from "../../shared/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/UIElements/LoadingSpinner";
 
+import "./ConsultRequests.css";
+import BackgroungImg from '../../Photos/DrListGg.jpg';
+import PntM from '../../Photos/Pnt_M.svg';
+import PntF from '../../Photos/Pnt_F.svg';
+
 const ConsultRequests = () => {
 
     const auth = useContext(AuthContext);
@@ -119,8 +124,7 @@ const ConsultRequests = () => {
 
             { !isLoading && patients && (
                 <React.Fragment>
-                    <h1>Nonconsulted Patients</h1>
-                    <br />
+                    <p className="Title" style={{float:"left",backgroundImage: `url(${BackgroungImg})`,fontSize:"4em"}}>Nonconsulted Patients</p>                                            
                     {
                         patients.map(patient => {
                             return (

@@ -9,6 +9,12 @@ import PatientList from "../components/PatientList";
 import BackgroungImg from '../../Photos/DrListGg.jpg';
 import "./Getpatients.css";
 
+import BackgroungImg from '../../Photos/DrListGg.jpg';
+import "./GetPatients.css";
+
+import PntM from '../../Photos/Pnt_M.svg';
+import PntF from '../../Photos/Pnt_F.svg';
+
 const GetPatients = () => {
     
     const auth = useContext(AuthContext);
