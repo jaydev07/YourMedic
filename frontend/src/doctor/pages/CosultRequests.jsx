@@ -128,6 +128,8 @@ const ConsultRequests = () => {
                     {
                         patients.map(patient => {
                             return (
+
+                                     
                                 <div key={patient.id} className="DocBox container" style={{background:"white" ,boxShadow:"rgba(0, 0, 0, 0.24) 2px 8px 20px",clear:"both",paddingTop:"2%",padding:"1% 3% 1%",margin:"1% 10% 1%",width:"80%",borderRadius:"15px"}}> 
                                     <div className="row">                    
                                         <div className="col-2">
@@ -136,31 +138,30 @@ const ConsultRequests = () => {
                                             </div>*/}
                                             <div className="row">
                                                 <h5>{patient.name}</h5>      
+                                            </div>                                            
+                                        </div>    
+                                        <div className="col-5">                        
+                                            <div class="row">
+                                                <p>Starting Date: {patient.startDate}</p>
                                             </div>
-                                            <div class="col-4">
-                                                <div class="row">
-                                                    <p>Location: {patient.city}, {patient.state}</p>
-                                                </div>
+                                            <div class="row">
+                                                <p>Phone Number: {patient.phoneNo}</p>
                                             </div>
-                                        </div>
-                                        <div className="row justify-content-md-center">    
+                                        </div>                                        
+                                        <div class="col-4">
+                                            <div class="row">
+                                                <p>Location: {patient.city}, {patient.state}</p>
+                                            </div>
+                                        </div>                                    
+                                    </div>
+                                    <div className="row justify-content-md-center">    
                                             <div class="col-6">
                                                 <button style={{display:"inline-block",float:"right"}} className="btn btn-success AcceptBtn col-4" onClick={() => accept(patient.id, patient.name)}>Accept</button>    
                                             </div>               
                                             <div class="col-6">
                                                 <button style={{display:"inline-block",float:"left"}} className="btn btn-danger RejectBtn col-4" onClick={() => reject(patient.id, patient.name)}>Reject</button>                                 
                                             </div>                                                                                                  
-                                        </div>                                                
-
-                                    </div>
-                                    <div className="row justify-content-md-center">    
-                                        <div class="col-6">
-                                            <button style={{display:"inline-block",float:"right"}} className="AcceptBtn col-4" onClick={() => accept(patient.id, patient.name)}>Accept</button>    
-                                        </div>               
-                                        <div class="col-6">
-                                            <button style={{display:"inline-block",float:"left"}} className="RejectBtn col-4" onClick={() => reject(patient.id, patient.name)}>Reject</button>                                 
-                                        </div>                                                                                                  
-                                    </div>
+                                        </div>                                                                                   
                                 </div>
                             )
                         })
