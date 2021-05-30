@@ -5,3 +5,33 @@ We have seen the medical infrastructure crumble in the past few months due to co
 Medister is an App that works as a bridge between doctors and patients. This App will connect doctors with their patients and provide constant updates and daily reports of them. Considering the current scenario, if a patient is suffering from covid-19 and has consulted a doctor through our app, they can connect on a platform where the patient can keep updating their oxygen level, temperature etc. in the app. Later on, the doctors can follow up with them on daily basis and can generate daily reports.
 
 ## Tech Implemented:
+
+- **FrontEnd:**
+  - reactjs
+  - bootstrap
+  - language used: javascript
+
+- **BackEnd:**
+  - nodejs
+  - mongoose, jwt, bcyrpt as major modules
+  - language used: javascript
+
+## Installation Info:
+
+- Clone the project and install it locally by using:
+  
+```bash
+git clone https://github.com/jaydev07/COVID-Home-Management.git
+```
+
+Now in terminal:
+
+```bash
+npm install
+```
+
+To start a webapp locally run:
+
+```bash
+npm start
+```
