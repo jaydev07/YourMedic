@@ -3,6 +3,11 @@ import {Link} from "react-router-dom";
 import "./Patient.css";
 import PntM from '../../Photos/Pnt_M.svg';
 import PntF from '../../Photos/Pnt_F.svg';
+import BgImg from '../../Photos/DesktopBg.png';
+
+import "./Patient.css";
+import DrM from '../../Photos/Dr_M.svg';
+import DrF from '../../Photos/Dr_F.svg';
 
 const Patient = (props) => {
     return(
@@ -11,7 +16,7 @@ const Patient = (props) => {
                 <div className="row">                    
                     <div className="col-2">
                         <div className="row">
-                            {props.gender==="Male" ? <img style={{width: 80,height: 80,borderRadius:100}} src={PntM} alt="Male Patient" /> : <img style={{width: 80,height: 55,borderRadius:80}} src={PntF} alt="Female Patient" /> }
+                            {props.gender==="Male" ? <img style={{width: 80,height: 80,borderRadius:100}} src={DrM} alt="Male Patient" /> : <img style={{width: 80,height: 55,borderRadius:80}} src={DrF} alt="Female Patient" /> }
                         </div>
                         <div className="row">
                             <h5>{props.name}</h5>      
@@ -29,7 +34,7 @@ const Patient = (props) => {
                         <div class="row">
                             <p>Location: {props.city}, {props.state}</p>
                         </div>
-                        <Link to={props.prescribedMedicines.length === 0 ? "/prescribe/medicine" : `/patient/${props.id}`}>                      
+                        <Link to={props.prescribedMedicines.length === 0 ? `/prescribe/medicine/${props.id}` : `/patient/${props.id}`}>                      
                             <button className="ViewBtn" style={{display:"inline-block"}}>View</button>         
                         </Link>           
                     </div>

@@ -6,10 +6,9 @@ import Backdrop from "../../shared/UIElements/Backdrop";
 import ErrorModal from "../../shared/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/UIElements/LoadingSpinner";
 import PatientList from "../components/PatientList";
-
 import BackgroungImg from '../../Photos/DrListGg.jpg';
 import "./GetPatients.css";
-
+import BgImg from '../../Photos/DesktopBg.png';
 import PntM from '../../Photos/Pnt_M.svg';
 import PntF from '../../Photos/Pnt_F.svg';
 
@@ -59,19 +58,21 @@ const GetPatients = () => {
 
             { !isLoading && patients && (
                 <React.Fragment>
-                    {patients.length!==0 ? (                        
-                        <p className="Title" style={{float:"left",backgroundImage: `url(${BackgroungImg})`,fontSize:"4em"}}>Patients</p>                        
-                    ):(
-                        <h1>No active patients</h1>
-                    )}
-                    <div style={{clear:"both"}}>
-                        <Link to="/consultrequests">
-                            <button className="NonCulPntBtn">See Nonconsulted Patients</button>
-                        </Link>
+                    <div style={{backgroundImage: `url(${BgImg})`}}>
+                        {patients.length!==0 ? (                        
+                            <p className="Title" style={{float:"left",backgroundImage: `url(${BackgroungImg})`,fontSize:"4em"}}>Patients</p>                        
+                        ):(
+                            <h1>No active patients</h1>
+                        )}
+                        <div style={{clear:"both"}}>
+                            <Link to="/consultrequests">
+                                <button className="btn NonCulPntBtn">See Non-consulted Patients</button>
+                            </Link>
+                        </div>
+                        {patients.length!==0 ? (
+                            <PatientList patients={patients} />
+                        ):null}
                     </div>
-                    {patients.length!==0 ? (
-                        <PatientList patients={patients} />
-                    ):null}
                 </React.Fragment>
             )}
         </React.Fragment>
