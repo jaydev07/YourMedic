@@ -1,6 +1,7 @@
 import React,{useState,useContext,useEffect} from "react";
 import {useHistory,Link,useParams} from "react-router-dom";
 
+import './Prescribe.css';
 import {AuthContext} from "../../shared/context/AuthContext";
 import Backdrop from "../../shared/UIElements/Backdrop";
 import ErrorModal from "../../shared/UIElements/ErrorModal";
@@ -98,25 +99,26 @@ const Prescribe = () => {
         return (
             <div key={index}>
                 <form>
-                    <label>Medicine Name</label>
-                    <input type="text" id="name" value={med.name} onChange={(e) => handleClick(e, index)}/>
-                    <br />
-                    <label>Duration</label>
-                    <input type="number" id="duration" value={med.duration} onChange={(e) => handleClick(e, index)}/>
-                    <br />
-                    <label>Morning</label>
+                    <label className="medicine-label">Medicine Name</label>
+                    <input className="form-control medicine-input" type="text" id="name" value={med.name} onChange={(e) => handleClick(e, index)}/>
+                    
+                    <label className="medicine-label">Duration</label>
+                    <input className="form-control medicine-input" type="number" id="duration" value={med.duration} onChange={(e) => handleClick(e, index)}/>
+            
+                    <label className="medicine-label">Morning</label>
                     <select value={morning} onChange={(e) => setMorning(e.target.value)}>
-                        <option value="morningBeforeB">Before BreadFast</option>
+                        <option value="morningBeforeB">Before BreakFast</option>
                         <option value="morningBfterB">After BreadFast</option>
                     </select>
                     <input 
                         type="number" 
                         id="morning" 
+                        className="form-control medicine-input"
                         value={morning === 'morningBeforeB' ? med.time.morningBeforeB : med.time.morningAfterB} 
                         onChange={(e) => handleClick(e, index)}
                     />
-                    <br />
-                    <label>Afternoon</label>
+
+                    <label className="medicine-label">Afternoon</label>
                     <select value={afternoon} onChange={(e) => setAfternoon(e.target.value)}>
                         <option value="afternoonBeforeL">Before Lunch</option>
                         <option value="afternoonAfterL">After Lunch</option>
@@ -124,11 +126,12 @@ const Prescribe = () => {
                     <input 
                         type="number" 
                         id="morning" 
+                        className="form-control medicine-input"
                         value={afternoon === 'afternoonBeforeL' ? med.time.afternoonBeforeL : med.time.afternoonAfterL} 
                         onChange={(e) => handleClick(e, index)}
                     />
-                    <br />
-                    <label>Evening</label>
+
+                    <label className="medicine-label">Evening</label>
                     <select value={evening} onChange={(e) => setEvening(e.target.value)}>
                         <option value="eveningBeforeD">Before Dinner</option>
                         <option value="eveningAfterD">After Dinner</option>
@@ -136,10 +139,10 @@ const Prescribe = () => {
                     <input 
                         type="number" 
                         id="morning" 
+                        className="form-control medicine-input"
                         value={evening === 'eveningBeforeD' ? med.time.eveningBeforeD : med.time.eveningAfterD} 
                         onChange={(e) => handleClick(e, index)}
                     />
-                    <br />
                 </form>
             </div>
         )
