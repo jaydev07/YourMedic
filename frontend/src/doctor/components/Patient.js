@@ -34,7 +34,7 @@ const Patient = (props) => {
                         <div class="row">
                             <p>Location: {props.city}, {props.state}</p>
                         </div>
-                        <Link to={props.prescribedMedicines.length === 0 ? `/prescribe/medicine/${props.id}` : `/patient/${props.id}`}>                      
+                        <Link to={(props.prescribedMedicines && props.prescribedMedicines.length === 0) ? `/prescribe/medicine/${props.id}` : `/patient/${props.id}`}>                      
                             <button className="ViewBtn" style={{display:"inline-block"}}>View</button>         
                         </Link>           
                     </div>
