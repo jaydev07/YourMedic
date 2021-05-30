@@ -212,27 +212,31 @@ const Prescribe = () => {
 
             { !isLoading && patient && (
                 <React.Fragment>
-                    <div>
-                        <h2>{patient.name}</h2>
-                        <p>From {patient.city},{patient.state}</p>
-                        <p>{patient.gender}</p>
-                        <h3>Patient's Problem</h3>
-                        <p>{patient.symptoms}</p>
-                        <h3>Patient's Current Medication</h3>
-                        {patient.currentMedicines.map((m, index) => {
-                            return(
-                                <p key={index}>Name {m.medicine} Since {m.startDate}</p>
-                            )
-                        })}
-                    </div>
-                    <div>
-                        <h1>Medicines</h1> 
-                        <br />
-                        {PrescribeMed}
-                        <button onClick={addMedicine}>+</button>
-                        <br />
-                        <button onClick={submitHandler}>Submit</button>       
-                    </div>
+                   <div className="patient-details">
+                    <h2 className="patient-name"><i class="fas fa-user-circle"></i> {patient.name} <p className="patient-gender">{patient.gender === "Male" ?<i class="fas fa-mars"></i> : <i class="fas fa-venus"></i>} </p></h2>
+                    <p className="patient-city">{patient.city}, {patient.state}</p>
+                </div>
+
+                <div className="patient-problem">
+                    <h3 style={{color:'#1E56A0', fontWeight:'700'}}>Patient's Problem</h3>
+                    <p style={{fontSize:'1.3rem'}}>{patient.symptoms}</p>
+                </div>
+
+                <div className="patient-medication">                             
+                    <h3 style={{color:'#1E56A0', fontWeight:'700'}}>Patient's Current Medication</h3>
+                    {patient.currentMedicines.map(m => {
+                        return(
+                            <p><span style={{color:'grey', fontWeight:'600', fontStyle:'italic'}}>Medicine Name</span> <span style={{color:'purple', fontWeight:'600', fontSize:'1.2rem'}}>{m.medicine}</span> 
+                            <span style={{color:'grey', fontWeight:'600', fontStyle:'italic'}}> since </span> <span style={{color:'purple', fontWeight:'600', fontSize:'1.2rem'}}>{m.startDate}</span></p>
+                        )
+                    })} 
+                </div>                   
+                <div className="medicinesDIV">
+                    <h1 style={{color:'#554674', fontWeight:'700'}}><i class="fas fa-capsules"></i> Medicines</h1>
+                    {PrescribeMed}
+                    <button className="btn btn-warning add-btn2" onClick={addMedicine}><i class="fas fa-plus"></i> Add</button>
+                    <button className="btn btn-primary submit-btn2" onClick={e => console.log(medicines)}>Submit</button>       
+                </div>
                 </React.Fragment>
             )}
         </React.Fragment>
