@@ -1,6 +1,7 @@
 import React,{useState,useContext} from "react";
 import {useHistory} from "react-router-dom";
 
+import './AddSymptoms.css';
 import {AuthContext} from "../../shared/context/AuthContext";
 import Backdrop from "../../shared/UIElements/Backdrop";
 import ErrorModal from "../../shared/UIElements/ErrorModal";
@@ -19,8 +20,9 @@ const AddSymptoms = () => {
 
     const changeMedicineHandler = (event) => {
         const index = event.target.name;
-        const change = event.target.className;
+        const change = String(event.target.className).split(' ')[0];
         const value = event.target.value;
+        console.log(change);
         setCurrentMedicines(prev => {
             if(change === "medicine"){
                 prev[index] = {
@@ -101,52 +103,57 @@ const AddSymptoms = () => {
 
     return(
         <React.Fragment>
-            { error && (
-                <React.Fragment>
-                    <Backdrop onClick={errorHandler} />
-                    <ErrorModal heading="Error Occured!" error={error} />
-                </React.Fragment>
-            )}
-            { isLoading && <LoadingSpinner asOverlay />}
+            <div id="bg-img">
+                <div className="complete">
+                    { error && (
+                        <React.Fragment>
+                            <Backdrop onClick={errorHandler} />
+                            <ErrorModal heading="Error Occured!" error={error} />
+                        </React.Fragment>
+                    )}
+                    { isLoading && <LoadingSpinner asOverlay />}
 
-            <form>
-                <h4>Your Problem/Symptoms</h4>
-                <textarea rows="3" value={symptoms} placeholder="Having cold,cough & fever ..." onChange={symptomsHandler}></textarea>
+                    <form>
+                        <h4 className="Question-Text">Your Problem/Symptoms</h4>
+                        <textarea rows="3" value={symptoms} placeholder="Having cold,cough & fever ..." onChange={symptomsHandler}></textarea>
 
-                <h4>Are you having diseases like Asthama or Cancer</h4>
-                <button onClick={showCurrentMedication}>Yes</button>
-                { showMedicineTags && (
-                    <div>
-                        <h6>Include your current medications for those diseases</h6>
-                        {
-                            currentMedicines.map((med,index) => {
-                                return(
-                                    <div key={index}>
-                                        <input 
-                                            className="medicine" 
-                                            type="text" 
-                                            placeholder="Medicine Name" 
-                                            name={index} 
-                                            value={med.medicine} 
-                                            onChange={changeMedicineHandler}
-                                        />
-                                        <label>Since</label>
-                                        <input 
-                                            className="date"
-                                            type="date"
-                                            name={index}
-                                            value={med.startDate}
-                                            onChange={changeMedicineHandler}
-                                        />
-                                    </div>
-                                )
-                            })
-                        }
-                        <button id="add-btn" onClick={addMedicineHandler}>Add</button>
-                    </div>
-                )}
-                <button onClick={submitHandler} disabled={symptoms.length === 0 ? true:false}>Submit</button>
-            </form> 
+                        <h4 className="Question-Text">Do you have any Chronic Disease?</h4>
+                        <button className="btn btn-success yes-btn" onClick={showCurrentMedication}><i class="fas fa-check-square"></i> Yes</button>
+                        { showMedicineTags && (
+                            <div>
+                                <h6 className="Question-Text2">Include your current/previous medicines</h6>
+                                {
+                                    currentMedicines.map((med,index) => {
+                                        return(
+                                            <div key={index}>
+                                                <input 
+                                                    className="medicine form-control" 
+                                                    type="text"
+                                                    placeholder="Medicine Name" 
+                                                    name={index} 
+                                                    value={med.medicine} 
+                                                    onChange={changeMedicineHandler}
+                                                />
+                                                <label className="since">Since</label>
+                                                <input 
+                                                    className="date form-control"
+                                                    type="date"
+                                                    name={index}
+                                                    value={med.startDate}
+                                                    onChange={changeMedicineHandler}
+                                                />
+                                                <hr></hr>
+                                            </div>
+                                        )
+                                    })
+                                }
+                                <button className="btn btn-warning add-btn" onClick={addMedicineHandler}><i class="fas fa-plus"></i> Add</button>
+                            </div>
+                        )}
+                        <button className="btn submit-btn" onClick={submitHandler} disabled={symptoms.length === 0 ? true:false}>Submit</button>
+                    </form> 
+                </div>
+            </div>
         </React.Fragment>
     );
 }
