@@ -7,6 +7,12 @@ import ErrorModal from "../../shared/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/UIElements/LoadingSpinner";
 import PatientList from "../components/PatientList";
 
+import BackgroungImg from '../../Photos/DrListGg.jpg';
+import "./GetPatients.css";
+
+import PntM from '../../Photos/Pnt_M.svg';
+import PntF from '../../Photos/Pnt_F.svg';
+
 const GetPatients = () => {
     
     const auth = useContext(AuthContext);
@@ -53,15 +59,16 @@ const GetPatients = () => {
 
             { !isLoading && patients && (
                 <React.Fragment>
-                    {patients.length!==0 ? (
-                        <h1>Patients</h1>
+                    {patients.length!==0 ? (                        
+                        <p className="Title" style={{float:"left",backgroundImage: `url(${BackgroungImg})`,fontSize:"4em"}}>Patients</p>                        
                     ):(
                         <h1>No active patients</h1>
                     )}
-                    <Link to="/consultrequests">
-                        See Nonconsulted Patients
-                    </Link>
-                    <hr />
+                    <div style={{clear:"both"}}>
+                        <Link to="/consultrequests">
+                            <button className="NonCulPntBtn">See Nonconsulted Patients</button>
+                        </Link>
+                    </div>
                     {patients.length!==0 ? (
                         <PatientList patients={patients} />
                     ):null}
