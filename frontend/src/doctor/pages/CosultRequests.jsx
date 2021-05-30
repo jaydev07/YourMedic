@@ -8,6 +8,7 @@ import LoadingSpinner from "../../shared/UIElements/LoadingSpinner";
 
 import "./ConsultRequests.css";
 import BackgroungImg from '../../Photos/DrListGg.jpg';
+import BgImg from '../../Photos/DesktopBg.png';
 import PntM from '../../Photos/Pnt_M.svg';
 import PntF from '../../Photos/Pnt_F.svg';
 
@@ -120,48 +121,50 @@ const ConsultRequests = () => {
 
             { !isLoading && patients && (
                 <React.Fragment>
-                    <p className="Title" style={{float:"left",backgroundImage: `url(${BackgroungImg})`,fontSize:"4em"}}>Nonconsulted Patients</p>                                            
-                    {
-                        patients.map(patient => {
+                    <div style={{backgroundImage: `url(${BgImg})`}}>
+                        <p className="Title" style={{backgroundImage: `url(${BackgroungImg})`,float:"left",fontSize:"4em"}}>Nonconsulted Patients</p>                                            
+                        {
+                            patients.map(patient => {
 
-                            return (                                  
-                                <div key={patient.id} className="DocBox container" style={{background:"white" ,boxShadow:"rgba(0, 0, 0, 0.24) 2px 8px 20px",clear:"both",paddingTop:"2%",padding:"1% 3% 1%",margin:"1% 10% 1%",width:"80%",borderRadius:"15px"}}> 
-                                    <div className="row">                    
-                                        <div className="col-2">
-                                            {/* <div className="row">
-                                                {patient.gender==="Male" ? <img style={{width: 80,height: 80,borderRadius:100}} src={PntM} alt="Male Patient" /> : <img style={{width: 80,height: 55,borderRadius:80}} src={PntF} alt="Female Patient" /> }
-                                            </div> */}
-                                            <div className="row">
-                                                <h5>{patient.name}</h5>      
+                                return (                                                                  
+                                    <div key={patient.id} className="DocBox container" style={{background:"white" ,boxShadow:"rgba(0, 0, 0, 0.24) 2px 8px 20px",clear:"both",paddingTop:"2%",padding:"1% 3% 1%",margin:"1% 10% 1%",width:"80%",borderRadius:"15px"}}> 
+                                        <div className="row">                    
+                                            <div className="col-2">
+                                                {/* <div className="row">
+                                                    {patient.gender==="Male" ? <img style={{width: 80,height: 80,borderRadius:100}} src={PntM} alt="Male Patient" /> : <img style={{width: 80,height: 55,borderRadius:80}} src={PntF} alt="Female Patient" /> }
+                                                </div> */}
+                                                <div className="row">
+                                                    <h5>{patient.name}</h5>      
+                                                </div>
+                                            </div>     
+                                            <div className="col-5">                        
+                                                <div class="row">
+                                                    <p>Starting Date: {patient.startDate}</p>
+                                                </div>
+                                                <div class="row">
+                                                    <p>Phone Number: {patient.phoneNo}</p>
+                                                </div>
                                             </div>
-                                        </div>     
-                                        <div className="col-5">                        
-                                            <div class="row">
-                                                <p>Starting Date: {patient.startDate}</p>
-                                            </div>
-                                            <div class="row">
-                                                <p>Phone Number: {patient.phoneNo}</p>
+                                            <div class="col-4">
+                                                <div class="row">
+                                                    <p>Location: {patient.city}, {patient.state}</p>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-4">
-                                            <div class="row">
-                                                <p>Location: {patient.city}, {patient.state}</p>
-                                            </div>
-                                        </div>
+                                        <div className="row justify-content-md-center">    
+                                            <div class="col-6">
+                                                <button style={{display:"inline-block",float:"right"}} className="AcceptBtn col-4" onClick={() => accept(patient.id, patient.name)}>Accept</button>    
+                                            </div>               
+                                            <div class="col-6">
+                                                <button style={{display:"inline-block",float:"left"}} className="RejectBtn col-4" onClick={() => reject(patient.id, patient.name)}>Reject</button>                                 
+                                            </div>                                                                                                  
+                                        </div>                                                
+
                                     </div>
-                                    <div className="row justify-content-md-center">    
-                                        <div class="col-6">
-                                            <button style={{display:"inline-block",float:"right"}} className="AcceptBtn col-4" onClick={() => accept(patient.id, patient.name)}>Accept</button>    
-                                        </div>               
-                                        <div class="col-6">
-                                            <button style={{display:"inline-block",float:"left"}} className="RejectBtn col-4" onClick={() => reject(patient.id, patient.name)}>Reject</button>                                 
-                                        </div>                                                                                                  
-                                    </div>                                                
-
-                                </div>
-                            )
-                        })
-                    }
+                                )
+                            })
+                        }
+                    </div>                        
                 </React.Fragment>
             )}
         </React.Fragment>
