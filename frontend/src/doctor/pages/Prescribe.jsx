@@ -125,7 +125,7 @@ const Prescribe = () => {
                     </select>
                     <input 
                         type="number" 
-                        id="morning" 
+                        id="afternoon" 
                         className="form-control medicine-input"
                         value={afternoon === 'afternoonBeforeL' ? med.time.afternoonBeforeL : med.time.afternoonAfterL} 
                         onChange={(e) => handleClick(e, index)}
@@ -138,7 +138,7 @@ const Prescribe = () => {
                     </select>
                     <input 
                         type="number" 
-                        id="morning" 
+                        id="evening" 
                         className="form-control medicine-input"
                         value={evening === 'eveningBeforeD' ? med.time.eveningBeforeD : med.time.eveningAfterD} 
                         onChange={(e) => handleClick(e, index)}
@@ -219,9 +219,9 @@ const Prescribe = () => {
                         <h3>Patient's Problem</h3>
                         <p>{patient.symptoms}</p>
                         <h3>Patient's Current Medication</h3>
-                        {patient.currentMedicines.map(m => {
+                        {patient.currentMedicines.map((m, index) => {
                             return(
-                                <p>Name {m.medicine} Since {m.startDate}</p>
+                                <p key={index}>Name {m.medicine} Since {m.startDate}</p>
                             )
                         })}
                     </div>
