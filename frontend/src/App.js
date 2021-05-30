@@ -57,9 +57,9 @@ const App = () => {
             <Prescribe />
           </Route>
 
-          <Router path="/patient/:patientId" exact>
+          <Route path="/patient/:patientId" exact>
             <PatientPage />
-          </Router>
+          </Route>
   
           <Redirect to="/patients" />
         </Switch>

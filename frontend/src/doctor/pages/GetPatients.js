@@ -7,7 +7,7 @@ import ErrorModal from "../../shared/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/UIElements/LoadingSpinner";
 import PatientList from "../components/PatientList";
 import BackgroungImg from '../../Photos/DrListGg.jpg';
-import "./GetPatients.css";
+import "./Getpatients.css";
 
 const GetPatients = () => {
     

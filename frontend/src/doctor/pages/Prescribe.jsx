@@ -235,7 +235,7 @@ const Prescribe = () => {
                     <h1 style={{color:'#554674', fontWeight:'700'}}><i class="fas fa-capsules"></i> Medicines</h1>
                     {PrescribeMed}
                     <button className="btn btn-warning add-btn2" onClick={addMedicine}><i class="fas fa-plus"></i> Add</button>
-                    <button className="btn btn-primary submit-btn2" onClick={e => console.log(medicines)}>Submit</button>       
+                    <button className="btn btn-primary submit-btn2" onClick={submitHandler}>Submit</button>       
                 </div>
                 </React.Fragment>
             )}
