@@ -11,57 +11,56 @@ const Medicine = require("../models/medicine-model");
 /////////////////////////////////////////////////////////////// POST Requests ////////////////////////////////////////////////////////////
 
 // To prescribe the medicines to a perticular patient
-const addMedicines = async (req,res,next) => {
+const addMedicines = async(req, res, next) => {
     const error = validationResult(req);
-    if(!error.isEmpty()){
+    if (!error.isEmpty()) {
         console.log(error);
-        return next(new HttpError('Invalid input.Please Check!',422));
+        return next(new HttpError('Invalid input.Please Check!', 422));
     }
 
-    const {doctorId,patientId,medicines} = req.body;
+    const { doctorId, patientId, medicines } = req.body;
 
-    let doctorFound,patientFound;
-    try{
+    let doctorFound, patientFound;
+    try {
         doctorFound = await Doctor.findById(doctorId);
         patientFound = await Patient.findById(patientId);
-    }catch(err){
+    } catch (err) {
         console.log(err);
         return next(new HttpError('Something went wrong', 500));
     }
 
-    if(!patientFound){
+    if (!patientFound) {
         return next(new HttpError('Patient not found', 500));
     }
 
-    medicines.forEach(async (medicine,index) => {
+    medicines.forEach(async(medicine, index) => {
         const newMedicine = new Medicine({
-            name:medicine.name,
-            duration:medicine.duration,
+            name: medicine.name,
+            duration: medicine.duration,
             active: true,
-            quantity:medicine.quantity,
-            patientId:patientFound,
-            doctorId:doctorFound,
-            time:medicine.time
+            patientId: patientFound,
+            doctorId: doctorFound,
+            time: medicine.time
         });
-        try{
+        try {
             await newMedicine.save();
             patientFound.prescribedMedicines.push(newMedicine);
-        }catch(err){
+        } catch (err) {
             console.log(err);
-            return next(new HttpError('Medicine not saved', 500));   
+            return next(new HttpError('Medicine not saved', 500));
         }
-        
-        if(index == medicines.length-1){
-            try{
+
+        if (index == medicines.length - 1) {
+            try {
                 await patientFound.save();
-            }catch(err){
+            } catch (err) {
                 console.log(err);
-                return next(new HttpError('Medicine not saved in Patient', 500));  
-            }   
+                return next(new HttpError('Medicine not saved in Patient', 500));
+            }
         }
     });
 
-    res.json({message:"medicine added successfully"});
+    res.json({ message: "medicine added successfully" });
 
 }
 
