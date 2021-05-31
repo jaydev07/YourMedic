@@ -141,14 +141,17 @@ const PatientAuth = () => {
                 }
 
                 auth.login(responseData.patient.id , responseData.patient.token , true);
-                if(responseData.patient.prescribedMedicines.length > 0){
-                    history.push(`/patient/home/${responseData.patient.id}`);
-                }
-                else if(responseData.patient.symmptoms){
-                    history.push(`/showalldoctors`);
+                const isDoctorPresent = responseData.patient.doctors.findIndex(doctor => doctor.active);
+                if(isDoctorPresent === -1 ){
+                    if(responseData.patient.symptoms){
+                        history.push('/showalldoctors');
+                    }else{
+                        history.push("/addsymptoms");
+                    }
+                    
                 }
                 else{
-                    history.push("/addsymptoms");
+                    history.push(`/patient/home`);
                 }
             }catch(err){
                 console.log(err);

@@ -24,7 +24,7 @@ cron.schedule("01 00 09 * * *", async () => {
         if(patient.prescribedMedicines.length > 0){
             let medicines = [];
             patient.prescribedMedicines.forEach(medicine => {
-                if(medicine.time.morningBeforeB){
+                if(medicine.time.morningBeforeB > 0){
                     medicines.push({name:medicine.name ,quantity:medicine.time.morningBeforeB});
                 }
             });
@@ -62,7 +62,7 @@ cron.schedule("01 00 10 * * *", async () => {
         if(patient.prescribedMedicines.length > 0){
             let medicines = [];
             patient.prescribedMedicines.forEach(medicine => {
-                if(medicine.time.morningAfterB){
+                if(medicine.time.morningAfterB > 0){
                     medicines.push({name:medicine.name ,quantity:medicine.time.morningAfterB});
                 }
             });
@@ -100,7 +100,7 @@ cron.schedule("01 00 12 * * *", async () => {
         if(patient.prescribedMedicines.length > 0){
             let medicines = [];
             patient.prescribedMedicines.forEach(medicine => {
-                if(medicine.time.afternoonBeforeL){
+                if(medicine.time.afternoonBeforeL > 0){
                     medicines.push({name:medicine.name ,quantity:medicine.time.afternoonBeforeL});
                 }
             });
@@ -138,7 +138,7 @@ cron.schedule("01 00 13 * * *", async () => {
         if(patient.prescribedMedicines.length > 0){
             let medicines = [];
             patient.prescribedMedicines.forEach(medicine => {
-                if(medicine.time.afternoonAfterL){
+                if(medicine.time.afternoonAfterL > 0){
                     medicines.push({name:medicine.name ,quantity:medicine.time.afternoonAfterL});
                 }
             });
@@ -176,7 +176,7 @@ cron.schedule("01 22 17 * * *", async () => {
         if(patient.prescribedMedicines.length > 0){
             let medicines = [];
             patient.prescribedMedicines.forEach(medicine => {
-                if(medicine.time.eveningBeforeD){
+                if(medicine.time.eveningBeforeD > 0){
                     medicines.push({name:medicine.name ,quantity:medicine.time.eveningBeforeD});
                 }
             });
@@ -220,7 +220,7 @@ cron.schedule("01 00 21 * * *", async () => {
         if(patient.prescribedMedicines.length > 0){
             let medicines = [];
             patient.prescribedMedicines.forEach(medicine => {
-                if(medicine.time.eveningAfterD){
+                if(medicine.time.eveningAfterD > 0){
                     medicines.push({name:medicine.name ,quantity:medicine.time.eveningAfterD});
                 }
             });

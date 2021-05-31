@@ -369,14 +369,28 @@ const consultDoctor = async(req, res, next) => {
     var yyyy = today.getFullYear();
     today = dd + '-' + mm + '-' + yyyy;
 
-    doctorFound.patientIds.push(patientFound);
-    doctorFound.patients.push({
-        patientId:patientFound.id,
-        consulted: false,
-        active: false,
-        startDate: today,
-        endDate: null
-    });
+
+    const indexOfPatient = doctorFound.patients.findIndex(patient => patient.patientId===patientId);
+    if(indexOfPatient === -1){
+        doctorFound.patientIds.push(patientFound);
+        doctorFound.patients.push({
+            patientId:patientFound.id,
+            consulted: false,
+            active: false,
+            startDate: today,
+            endDate: null
+        });
+    }else{
+        if(doctorFound.patients.active){
+            console.log(err);
+            return next(new HttpError('This doctor is already consulting you', 500));
+        }else{
+            doctorFound.patients[indexOfPatient].consulted = false;
+            doctorFound.patients[indexOfPatient].startDate = today;
+            doctorFound.patients[indexOfPatient].endDate = null;
+        }
+    }
+
     try {
         await doctorFound.save();
     } catch (err) {
@@ -387,7 +401,7 @@ const consultDoctor = async(req, res, next) => {
     //////////////////////////////////// Email //////////
 
     let mailOptions = {
-        from:"jaydevbhavsar.ict18@gmail.com",
+        from:"jdbhavsar213@gmail.com",
         to:`${doctorFound.email}`,
         subject:"New Patient Request",
         text:`Hello ${doctorFound.name},

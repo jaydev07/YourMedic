@@ -91,8 +91,6 @@ const Prescribe = () => {
                 setMedicines(newMed);
             }
         }
-        
-        console.log(medicines);
     }
 
     const PrescribeMed = medicines.map((med, index) => {
@@ -222,14 +220,20 @@ const Prescribe = () => {
                     <p style={{fontSize:'1.3rem'}}>{patient.symptoms}</p>
                 </div>
 
-                <div className="patient-medication">                             
-                    <h3 style={{color:'#1E56A0', fontWeight:'700'}}>Patient's Current Medication</h3>
-                    {patient.currentMedicines.map(m => {
-                        return(
-                            <p><span style={{color:'grey', fontWeight:'600', fontStyle:'italic'}}>Medicine Name</span> <span style={{color:'purple', fontWeight:'600', fontSize:'1.2rem'}}>{m.medicine}</span> 
-                            <span style={{color:'grey', fontWeight:'600', fontStyle:'italic'}}> since </span> <span style={{color:'purple', fontWeight:'600', fontSize:'1.2rem'}}>{m.startDate}</span></p>
-                        )
-                    })} 
+                <div className="patient-medication">
+                    {(patient.currentMedicines && patient.currentMedicines.length > 0) ? (
+                        <React.Fragment>
+                            <h3 style={{color:'#1E56A0', fontWeight:'700'}}>Patient's Current Medication</h3>
+                            {patient.currentMedicines.map(m => {
+                                return(
+                                    <p><span style={{color:'grey', fontWeight:'600', fontStyle:'italic'}}>Medicine Name</span> <span style={{color:'purple', fontWeight:'600', fontSize:'1.2rem'}}>{m.medicine}</span> 
+                                    <span style={{color:'grey', fontWeight:'600', fontStyle:'italic'}}> since </span> <span style={{color:'purple', fontWeight:'600', fontSize:'1.2rem'}}>{m.startDate}</span></p>
+                                )
+                            })}
+                        </React.Fragment>
+                    ):(
+                        <h3 style={{color:'#1E56A0', fontWeight:'700'}}>Patient is not having any chronic diseases or current medication</h3>
+                    ) }                              
                 </div>                   
                 <div className="medicinesDIV">
                     <h1 style={{color:'#554674', fontWeight:'700'}}><i class="fas fa-capsules"></i> Medicines</h1>

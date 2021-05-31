@@ -19,12 +19,14 @@ const Patient = (props) => {
                             {props.gender==="Male" ? <img style={{width: 80,height: 80,borderRadius:100}} src={DrM} alt="Male Patient" /> : <img style={{width: 80,height: 55,borderRadius:80}} src={DrF} alt="Female Patient" /> }
                         </div>
                         <div className="row">
-                            <h5>{props.name}</h5>      
+                            <h5>{props.name}</h5> 
+                            <h6>{props.active ? "Active" : "Not Active"}</h6>     
                         </div>
                     </div>     
                     <div className="col-5">                        
                         <div class="row">
                             <p>Starting Date: {props.startDate}</p>
+                            {!props.active && <p>Ending date :- {props.endDate}</p>}
                         </div>
                         <div class="row">
                             <p>Phone Number: {props.phoneNo}</p>
@@ -34,7 +36,7 @@ const Patient = (props) => {
                         <div class="row">
                             <p>Location: {props.city}, {props.state}</p>
                         </div>
-                        <Link to={props.prescribedMedicines.length === 0 ? `/prescribe/medicine/${props.id}` : `/patient/${props.id}`}>                      
+                        <Link to={(props.prescribedMedicines && props.prescribedMedicines.length === 0) ? `/prescribe/medicine/${props.id}` : `/patient/${props.id}`}>                      
                             <button className="ViewBtn" style={{display:"inline-block"}}>View</button>         
                         </Link>           
                     </div>

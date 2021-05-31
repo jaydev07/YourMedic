@@ -18,6 +18,7 @@ import PntF from '../../Photos/Pnt_F.svg';
 const ConsultRequests = () => {
 
     const auth = useContext(AuthContext);
+    const history = useHistory();
     const [isLoading , setIsLoading] = useState(false);
     const [error , setError] = useState();
     const [popup , setPopup] = useState();
@@ -44,6 +45,7 @@ const ConsultRequests = () => {
             }
 
             setPopup(`${patientName}'s request is been confirmed`);
+            history.push(`/prescribe/medicine/${patientId}`);
         }catch(err){
             console.log(err);
             setError(err.message);
@@ -124,7 +126,11 @@ const ConsultRequests = () => {
 
             { !isLoading && patients && (
                 <React.Fragment>
-                    <p className="Title" style={{float:"left",backgroundImage: `url(${BackgroungImg})`,fontSize:"4em"}}>Nonconsulted Patients</p>                                            
+                    { patients.length > 0 ? (
+                        <p className="Title" style={{float:"left",backgroundImage: `url(${BackgroungImg})`,fontSize:"4em"}}>Nonconsulted Patients</p>    
+                    ):(
+                        <p className="Title" style={{float:"left",backgroundImage: `url(${BackgroungImg})`,fontSize:"4em"}}>No Nonconsulted Patients</p>
+                    )}                                            
                     {
                         patients.map(patient => {
                             return (

@@ -312,39 +312,64 @@ const confirmPatient = async (req,res,next) => {
     doctorFound.patients[index].active = true;
     doctorFound.patients[index].startDate = today;
 
-    // Deactivating all the previous doctors in patient
-    patientFound.doctors.forEach(doctor => {
-        doctor.active = false;
-        if(!doctor.endDate){
-            doctor.endDate = today;
-        }
-    });
+    // If the patient have previous doctors
+    if(patientFound.doctors.length > 0){
 
-    // Removing the patient's data from all the previous doctors data
-    patientFound.doctorIds.forEach(async (doctor,index) => {
-        const patientIndexInDoctor = doctor.patients.findIndex(patient => patient.patientId === patientId);
-        doctor.patients[patientIndexInDoctor].active = false;
-        if(!doctor.patients[patientIndexInDoctor].endDate){
-            doctor.patients[patientIndexInDoctor].endDate = today;
-        }
-        try{
-            doctor.save();
-        }catch(err){
-            console.log(err);
-            return next(new HttpError('Something went wrong.Previous doctors data not saved', 500));
-        }
-    })
+        const indexOfCurrentlyActiveDoctor = patientFound.doctors.findIndex(doctor => doctor.active);
+        // Checking if the patient is currently having any active doctor 
+        if(indexOfCurrentlyActiveDoctor !== -1){
+            // Deactivating the previous doctor in patient
+            patientFound.doctors[indexOfCurrentlyActiveDoctor].active = false;
+            if(!patientFound.doctors[indexOfCurrentlyActiveDoctor].endDate){
+                patientFound.doctors[indexOfCurrentlyActiveDoctor].endDate = today;
+            }
     
-    // Adding the new Doctor in patient
-    patientFound.doctorIds.push(doctorFound);
-    patientFound.doctors.push({
-        name:doctorFound.name,
-        active:true,
-        startDate:today,
-        endDate:null
-    });
-    patientFound.prescribedMedicines = [];
-    // patientFound.reports = [];
+            // Removing the patient's data from the previous doctor's data
+            const patientIndexInDoctor = patientFound.doctorIds[indexOfCurrentlyActiveDoctor].patients.findIndex(patient => patient.patientId === patientId);
+            patientFound.doctorIds[indexOfCurrentlyActiveDoctor].patients[patientIndexInDoctor].active = false;
+            if(!patientFound.doctorIds[indexOfCurrentlyActiveDoctor].patients[patientIndexInDoctor].endDate){
+                patientFound.doctorIds[indexOfCurrentlyActiveDoctor].patients[patientIndexInDoctor].endDate = today;
+            }
+            try{
+                patientFound.doctorIds[indexOfCurrentlyActiveDoctor].save();
+            }catch(err){
+                console.log(err);
+                return next(new HttpError('Something went wrong.Previous doctors data not saved', 500));
+            }
+        }
+
+        // Checking that the consulted doctor is already present in the patient's list or not
+        const indexOfDoctor = patientFound.doctorIds.findIndex(doctor => doctor.id === doctorId);
+        if(indexOfDoctor === -1){
+            // Doctor is not present in the patient's list so adding the new Doctor in patient
+            patientFound.doctorIds.push(doctorFound);
+            patientFound.doctors.push({
+                name:doctorFound.name,
+                active:true,
+                startDate:today,
+                endDate:null
+            });
+            patientFound.prescribedMedicines = [];
+            // patientFound.reports = [];
+        }else{
+            // Consulted doctor is already present in the patient's list
+            patientFound.doctors[indexOfDoctor].active=true;
+            patientFound.doctors[indexOfDoctor].startDate=today;
+            patientFound.doctors[indexOfDoctor].endDate=null;
+            patientFound.prescribedMedicines = [];
+            // patientFound.reports = [];
+        }
+    }else{
+        // If the patient have no previous doctors
+        patientFound.doctorIds.push(doctorFound);
+        patientFound.doctors.push({
+            name:doctorFound.name,
+            active:true,
+            startDate:today,
+            endDate:null
+        });
+        patientFound.prescribedMedicines = [];
+    }
 
     try{
         const sess = await mongoose.startSession();
@@ -360,15 +385,13 @@ const confirmPatient = async (req,res,next) => {
     }
 
     //////////////////////// Email ////////////////
-
     let mailOptions = {
-        from:"jaydevbhavsar.ict18@gmail.com",
+        from:"jdbhavsar213@gmail.com",
         to:`${patientFound.email}`,
         subject:"Consulted Request Approved",
         text:`Congratulations ${patientFound.name},
             ${doctorFound.name} from ${doctorFound.city},${doctorFound.state} is ready to consult you. `
     };
-
     transporter.sendMail(mailOptions, (err,info) => {
         if(err){
             console.log(err);
@@ -412,15 +435,13 @@ const rejectPatient = async ( req,res,next) => {
     }
 
     //////////////////////// Email ////////////////
-
     let mailOptions = {
-        from:"jaydevbhavsar.ict18@gmail.com",
+        from:"jdbhavsar213@gmail.com",
         to:`${patientFound.email}`,
         subject:"Consulted Request Rejected",
         text:`Hey ${patientFound.name},
             ${doctorFound.name} from ${doctorFound.city},${doctorFound.state} has rejected your consulting request. We suggest you to consult a new doctor.`
     };
-
     transporter.sendMail(mailOptions, (err,info) => {
         if(err){
             console.log(err);
@@ -486,15 +507,13 @@ const medicationEnded = async ( req,res,next) => {
     }
 
     //////////////////////// Email ////////////////
-
     let mailOptions = {
-        from:"jaydevbhavsar.ict18@gmail.com",
+        from:"jdbhavsar213@gmail.com",
         to:`${patientFound.email}`,
         subject:"Medication Completed",
         text:`Hello ${patientFound.name},
             ${doctorFound.name} from ${doctorFound.city},${doctorFound.state} has approved that your medication is completed. You are normal now!`
     };
-
     transporter.sendMail(mailOptions, (err,info) => {
         if(err){
             console.log(err);

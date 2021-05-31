@@ -12,7 +12,9 @@ const PatientList = (props) => {
                         key={patient.id}
                         id={patient.id}
                         name={patient.name}
+                        active={patient.active}
                         startDate={patient.startDate}
+                        endDate={patient.endDate}
                         phoneNo={patient.phoneNo}
                         city={patient.city}
                         state={patient.state}

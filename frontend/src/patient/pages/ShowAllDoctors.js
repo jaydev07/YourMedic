@@ -141,7 +141,7 @@ const ShowAllDoctors = () => {
                     doctors.map(doctor => {
                         return(
                             <React.Fragment>                   
-                                <div className="DocBox container" style={{background:"white" ,boxShadow:"rgba(0, 0, 0, 0.24) 2px 8px 20px",clear:"both",paddingTop:"2%",padding:"1% 3% 1%",margin:"1% 10% 1%",width:"80%",borderRadius:"15px"}}> 
+                                <div key={doctor.id} className="DocBox container" style={{background:"white" ,boxShadow:"rgba(0, 0, 0, 0.24) 2px 8px 20px",clear:"both",paddingTop:"2%",padding:"1% 3% 1%",margin:"1% 10% 1%",width:"80%",borderRadius:"15px"}}> 
                                     <div className="row">
                                         <div className="col-2">
                                             <div className="row">

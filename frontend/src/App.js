@@ -18,6 +18,7 @@ import ConsultRequests from './doctor/pages/CosultRequests';
 import AddSymptoms from "./patient/pages/AddSymptoms";
 import Prescribe from './doctor/pages/Prescribe';
 import PatientPage from './doctor/pages/PatientPage';
+import Navbar from "./shared/components/Navbar";
 
 const App = () => {
 
@@ -46,18 +47,22 @@ const App = () => {
       routes = (
         <Switch>
           <Route path="/patients" exact>
+            <Navbar />
             <GetPatients />
           </Route>
 
           <Route path="/consultrequests" exact>
+            <Navbar />
             <ConsultRequests />
           </Route>
 
           <Route path="/prescribe/medicine/:patientId" exact>
+            <Navbar />
             <Prescribe />
           </Route>
 
           <Route path="/patient/:patientId" exact>
+            <Navbar />
             <PatientPage />
           </Route>
   
@@ -68,14 +73,17 @@ const App = () => {
       routes = (
         <Switch>
           <Route path="/showalldoctors" exact>
+            <Navbar />
             <ShowAllDoctors />
           </Route>
   
           <Route path="/addsymptoms" exact>
+            <Navbar />
             <AddSymptoms />
           </Route>
   
-          <Route path="/patient/home/:patientId" exact>
+          <Route path="/patient/home" exact>
+            <Navbar />
             <PatientHome />
           </Route>
   
