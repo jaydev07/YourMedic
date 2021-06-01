@@ -13,7 +13,7 @@ Medister is an App that works as a bridge between doctors and patients. This App
 
 - **BackEnd:**
   - nodejs
-  - mongoose, jwt, bcyrpt as major modules
+  - mongoose, jwt, bcrypt as major modules
   - language used: javascript
 
 ## Installation Info:
