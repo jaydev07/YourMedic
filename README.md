@@ -1,4 +1,4 @@
-# COVID-Home-Management
+# YourMedic
 ---
 We have seen the medical infrastructure crumble in the past few months due to covid-19 and this being the reason, there has been the unavailability of medical facilities for many patients in urgent need of guidance of a doctor and a lack of technical supports for doctors to connect with their patients. Keeping this problem in mind, we came up with our WebApp - "YourMedic" to provide a solution.
 
