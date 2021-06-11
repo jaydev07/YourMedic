@@ -37,16 +37,29 @@ npm start
 ```
 ## Application ScreenShots:
 
+Base Page
 ![1](https://user-images.githubusercontent.com/53286842/120095713-14c08e80-c145-11eb-8a18-08b866b807fc.PNG)
+
+Patient's Login page
 ![2](https://user-images.githubusercontent.com/53286842/120095717-18ecac00-c145-11eb-91bf-126ab4c0c811.PNG)
+
+
+Patient's Signup page
 ![3](https://user-images.githubusercontent.com/53286842/120095719-19854280-c145-11eb-9c00-1f52fcac84e4.PNG)
+
+Patient's Add symptoms page
 ![4](https://user-images.githubusercontent.com/53286842/120095720-1a1dd900-c145-11eb-8ac2-0bcb0b37ebf9.PNG)
 ![5](https://user-images.githubusercontent.com/53286842/120095722-1be79c80-c145-11eb-8056-c9ef21582a27.PNG)
+
+List of all doctors
 ![6](https://user-images.githubusercontent.com/53286842/120095724-1d18c980-c145-11eb-8a64-0fb137155869.PNG)
-![7](https://user-images.githubusercontent.com/53286842/120095726-1e49f680-c145-11eb-8234-c96464003cc5.PNG)
-![8](https://user-images.githubusercontent.com/53286842/120095727-1e49f680-c145-11eb-915f-df42cc5eba6c.PNG)
-![9](https://user-images.githubusercontent.com/53286842/120095732-2013ba00-c145-11eb-89bf-a37128a5f996.PNG)
-![10](https://user-images.githubusercontent.com/53286842/120095734-20ac5080-c145-11eb-896b-766d9758d355.PNG)
-![11](https://user-images.githubusercontent.com/53286842/120095735-2144e700-c145-11eb-9520-038ee1c8efba.PNG)
-![12](https://user-images.githubusercontent.com/53286842/120095737-21dd7d80-c145-11eb-83f8-9dcc392bb50e.PNG)
-![13](https://user-images.githubusercontent.com/53286842/120095739-22761400-c145-11eb-9f0f-21777f87d8eb.PNG)
+
+Doctor's Login page
+![7](https://user-images.githubusercontent.com/53286842/120095727-1e49f680-c145-11eb-915f-df42cc5eba6c.PNG)
+
+Doctor's Active patients list 
+![8](https://user-images.githubusercontent.com/53286842/120095732-2013ba00-c145-11eb-89bf-a37128a5f996.PNG)
+![9](https://user-images.githubusercontent.com/53286842/120095734-20ac5080-c145-11eb-896b-766d9758d355.PNG)
+
+Doctor's Pending patients request list
+![10](https://user-images.githubusercontent.com/53286842/120095735-2144e700-c145-11eb-9520-038ee1c8efba.PNG)
